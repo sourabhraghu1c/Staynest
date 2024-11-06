@@ -1,0 +1,23 @@
+{
+  "name": "staynest",
+  "version": "1.0.0",
+  "description": "A hostel/PG room booking website for students.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "hostel",
+    "PG",
+    "booking",
+    "student",
+    "rooms"
+  ],
+  "author": "Sourabh Raghuwanshi",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sourabhraghu1c/Staynest.git"
+  }
+}
+
