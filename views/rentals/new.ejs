@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Rental</title>
+</head>
+<body>
+    <h2>Add New Rental</h2>
+    <form action="/rentals" method="POST">
+        <!-- Title -->
+        <input type="text" name="rental[title]" placeholder="Enter the title (e.g., Spacious PG Near City Center)" required>
+        <br><br>
+
+        <!-- Description -->
+        <textarea name="rental[description]" placeholder="Provide a description of the rental (e.g., Fully furnished PG...)" required></textarea>
+        <br><br>
+
+        <!-- Location -->
+        <input type="text" name="rental[location][state]" placeholder="Enter the state (e.g., Madhya Pradesh)" required>
+        <input type="text" name="rental[location][pincode]" placeholder="Enter the pincode (e.g., 123456)" required>
+        <input type="text" name="rental[location][address]" placeholder="Enter the full address (e.g., 101 Main Street, Indore)" required>
+        <br><br>
+
+        <!-- Price -->
+        <input type="number" name="rental[price]" placeholder="Enter the price per month (e.g., 7500)" required>
+        <br><br>
+
+        <!-- Property Type -->
+        <select name="rental[propertyType]" required>
+            <option value="" disabled selected>Select property type</option>
+            <option value="Hostel">Hostel</option>
+            <option value="PG">PG (Paying Guest)</option>
+            <option value="Single Room">Single Room</option>
+            <option value="1RK">1RK (Room Kitchen)</option>
+            <option value="1BHK">1BHK (Bedroom Hall Kitchen)</option>
+            <option value="2BHK">2BHK (Two Bedroom Hall Kitchen)</option>
+            <option value="3BHK">3BHK (Three Bedroom Hall Kitchen)</option>
+        </select>
+        <br><br>
+
+        <!-- Facilities -->
+        <input type="text" name="rental[facilities]" placeholder="Enter available facilities (e.g., Wi-Fi, Laundry)">
+        <br><br>
+
+        <!-- Photos -->
+        <input type="url" name="rental[photos]" placeholder="Enter the photo URL" required>
+        <br><br>
+
+        <!-- Contact Information -->
+        <input type="text" name="rental[contact][name]" placeholder="Enter contact name (e.g., Sourabh)" required>
+        <input type="text" name="rental[contact][phone]" placeholder="Enter contact phone (e.g., 1234567891)" required>
+        <input type="email" name="rental[contact][email]" placeholder="Enter contact email (optional)">
+        <br><br>
+
+        <!-- Submit Button -->
+        <button type="submit">Add Rental</button>
+    </form>
+</body>
+</html>

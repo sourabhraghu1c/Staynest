@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>staynest</title>
+</head>
+<body>
+    <h3>Rental detail:</h3>
+    <ul>
+        <li><%= rental.title %></li>
+        <li><%= rental.description %></li>
+        <li><%= rental.location.address %>, <%= rental.location.state %> - <%= rental.location.pincode %></li>
+        <li>&#8377;<%= rental.price.toLocaleString("en-IN") %> <br></li>
+        <li><%= rental.propertyType %></li>
+        <li><%= rental.contact.name %> (<%= rental.contact.phone %>)</li>
+        <% if (rental.contact.email) { %>
+            <li><%= rental.contact.email %></li>
+        <% } %>
+        <% if (rental.facilities) { %>
+            <li><%= rental.facilities %></li>
+        <% } %>
+    </ul>
+    <a href="/rentals/<%= rental._id %>/edit">Edit</a>
+    <br><br>
+    <form method="post" action="/rentals/<%= rental._id %>/?_method=DELETE">
+        <button>Delete</button>
+    </form>
+</body>
+</html>

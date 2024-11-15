@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Rental</title>
+</head>
+<body>
+    <h2>Edit Rental</h2>
+    <form method="post" action="/rentals/<%= rental._id %>/?_method=PUT">
+        <!-- Title -->
+        <input type="text" name="rental[title]"value="<%= rental.title %>" required>
+        <br><br>
+
+        <!-- Description -->
+        <textarea name="rental[description]"required><%= rental.description %></textarea>
+        <br><br>
+
+        <!-- Location -->
+        <input type="text" name="rental[location][state]" value="<%= rental.location.state %>" required>
+        <input type="text" name="rental[location][pincode]"  value="<%= rental.location.pincode %>" required>
+        <input type="text" name="rental[location][address]"value="<%= rental.location.address %>" required>
+        <br><br>
+
+        <!-- Price -->
+        <input type="number" name="rental[price]" value="<%= rental.price %>" required>
+        <br><br>
+
+        <!-- Property Type -->
+        <select name="rental[propertyType]" required>
+            <option value="" disabled>Select property type</option>
+            <option value="Hostel" <%= rental.propertyType === 'Hostel' ? 'selected' : '' %>>Hostel</option>
+            <option value="PG" <%= rental.propertyType === 'PG' ? 'selected' : '' %>>PG (Paying Guest)</option>
+            <option value="Single Room" <%= rental.propertyType === 'Single Room' ? 'selected' : '' %>>Single Room</option>
+            <option value="1RK" <%= rental.propertyType === '1RK' ? 'selected' : '' %>>1RK (Room Kitchen)</option>
+            <option value="1BHK" <%= rental.propertyType === '1BHK' ? 'selected' : '' %>>1BHK (Bedroom Hall Kitchen)</option>
+            <option value="2BHK" <%= rental.propertyType === '2BHK' ? 'selected' : '' %>>2BHK (Two Bedroom Hall Kitchen)</option>
+            <option value="3BHK" <%= rental.propertyType === '3BHK' ? 'selected' : '' %>>3BHK (Three Bedroom Hall Kitchen)</option>
+        </select>
+        <br><br>
+
+        <!-- Facilities -->
+        <input type="text" name="rental[facilities]"value="<%= rental.facilities %>">
+        <br><br>
+
+        <!-- Photos -->
+        <input type="url" name="rental[photos]"value="<%= rental.photos %>" required>
+        <br><br>
+
+        <!-- Contact Information -->
+        <input type="text" name="rental[contact][name]"  value="<%= rental.contact.name %>" required>
+        <input type="text" name="rental[contact][phone]"  value="<%= rental.contact.phone %>" required>
+        <input type="email" name="rental[contact][email]"value="<%= rental.contact.email %>">
+        <br><br>
+
+        <!-- Submit Button -->
+        <button type="submit">Update Rental</button>
+    </form>
+</body>
+</html>

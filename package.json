@@ -2,7 +2,7 @@
   "name": "staynest",
   "version": "1.0.0",
   "description": "A hostel/PG room booking website for students.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,6 +18,11 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/sourabhraghu1c/Staynest.git"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.8.0"
   }
 }
-
