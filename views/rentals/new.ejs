@@ -1,60 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Rental</title>
-</head>
+
+<% layout("/layouts/boilerplate") %>
 <body>
-    <h2>Add New Rental</h2>
-    <form action="/rentals" method="POST">
-        <!-- Title -->
-        <input type="text" name="rental[title]" placeholder="Enter the title (e.g., Spacious PG Near City Center)" required>
-        <br><br>
+    <div class="row mt-3">
+        <div class="col-8 offset-2">
+            <h2 class="mb-3">Add New Rental</h2>
+            <form action="/rentals" method="POST" novalidate class="needs-validation">
+                
+                <!-- Title -->
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title:</label>
+                    <input type="text" name="rental[title]" class="form-control" placeholder="Enter the title (e.g., Spacious PG Near City Center)" required>
+                    <div class="invalid-feedback">Please enter a title</div>
+                </div>
+                
+                <!-- Description -->
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description:</label>
+                    <textarea name="rental[description]" class="form-control" placeholder="Provide a description of the rental (e.g.,with library on walking distance,...)" required></textarea>
+                    <div class="invalid-feedback">Please provide a description</div>
+                </div>
 
-        <!-- Description -->
-        <textarea name="rental[description]" placeholder="Provide a description of the rental (e.g., Fully furnished PG...)" required></textarea>
-        <br><br>
+                <!-- Location -->
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="address" class="form-label">Address:</label>
+                        <input type="text" name="rental[location][address]" class="form-control" placeholder="Enter the full address" required>
+                        <div class="invalid-feedback">Please provide an address</div>
+                    </div>
+                    <div class="mb-3 col-md-4">
+                        <label for="state" class="form-label">State:</label>
+                        <input type="text" name="rental[location][state]" class="form-control" placeholder="Enter the state" required>
+                        <div class="invalid-feedback">Please provide a state</div>
+                    </div>
+                    <div class="mb-3 col-md-4">
+                        <label for="pincode" class="form-label">Pincode:</label>
+                        <input type="text" name="rental[location][pincode]" class="form-control" placeholder="Enter the pincode" required>
+                        <div class="invalid-feedback">Please provide a valid pincode</div>
+                    </div>
+                </div>
 
-        <!-- Location -->
-        <input type="text" name="rental[location][state]" placeholder="Enter the state (e.g., Madhya Pradesh)" required>
-        <input type="text" name="rental[location][pincode]" placeholder="Enter the pincode (e.g., 123456)" required>
-        <input type="text" name="rental[location][address]" placeholder="Enter the full address (e.g., 101 Main Street, Indore)" required>
-        <br><br>
+                <!-- Price -->
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price (per month):</label>
+                    <input type="number" name="rental[price]" class="form-control" placeholder="Enter the price" required>
+                    <div class="invalid-feedback">Please provide a valid price</div>
+                </div>
 
-        <!-- Price -->
-        <input type="number" name="rental[price]" placeholder="Enter the price per month (e.g., 7500)" required>
-        <br><br>
+                <!-- Property Type -->
+                <div class="mb-3">
+                    <label for="propertyType" class="form-label">Property Type:</label>
+                    <select name="rental[propertyType]" class="form-select" required>
+                        <option value="" disabled selected>Select property type</option>
+                        <option value="Hostel">Hostel</option>
+                        <option value="PG">PG (Paying Guest)</option>
+                        <option value="Single Room">Single Room</option>
+                        <option value="1RK">1RK (Room Kitchen)</option>
+                        <option value="1BHK">1BHK (Bedroom Hall Kitchen)</option>
+                        <option value="2BHK">2BHK (Two Bedroom Hall Kitchen)</option>
+                        <option value="3BHK">3BHK (Three Bedroom Hall Kitchen)</option>
+                    </select>
+                    <div class="invalid-feedback">Please select a property type</div>
+                </div>
 
-        <!-- Property Type -->
-        <select name="rental[propertyType]" required>
-            <option value="" disabled selected>Select property type</option>
-            <option value="Hostel">Hostel</option>
-            <option value="PG">PG (Paying Guest)</option>
-            <option value="Single Room">Single Room</option>
-            <option value="1RK">1RK (Room Kitchen)</option>
-            <option value="1BHK">1BHK (Bedroom Hall Kitchen)</option>
-            <option value="2BHK">2BHK (Two Bedroom Hall Kitchen)</option>
-            <option value="3BHK">3BHK (Three Bedroom Hall Kitchen)</option>
-        </select>
-        <br><br>
+                <!-- Facilities -->
+                <div class="mb-3">
+                    <label for="facilities" class="form-label">Facilities:</label>
+                    <input type="text" name="rental[facilities]" class="form-control" placeholder="Enter available facilities (e.g., Wi-Fi, Laundry)">
+                </div>
 
-        <!-- Facilities -->
-        <input type="text" name="rental[facilities]" placeholder="Enter available facilities (e.g., Wi-Fi, Laundry)">
-        <br><br>
+                <!-- Photos -->
+                <div class="mb-3">
+                    <label for="photos" class="form-label">Photo URL:</label>
+                    <input type="url" name="rental[photos]" class="form-control" placeholder="Enter the photo URL" required>
+                    <div class="invalid-feedback">Please provide a photo URL</div>
+                </div>
 
-        <!-- Photos -->
-        <input type="url" name="rental[photos]" placeholder="Enter the photo URL" required>
-        <br><br>
+                <!-- Contact Information -->
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="name" class="form-label">Contact Name:</label>
+                        <input type="text" name="rental[contact][name]" class="form-control" placeholder="Enter contact name" required>
+                        <div class="invalid-feedback">Please provide a contact name</div>
+                    </div>
+                    <div class="mb-3 col-md-4">
+                        <label for="phone" class="form-label">Contact Phone:</label>
+                        <input type="text" name="rental[contact][phone]" class="form-control" placeholder="Enter contact phone" required>
+                        <div class="invalid-feedback">Please provide a valid phone number</div>
+                    </div>
+                    <div class="mb-3 col-md-4">
+                        <label for="email" class="form-label">Contact Email:</label>
+                        <input type="email" name="rental[contact][email]" class="form-control" placeholder="(optional)">
+                    </div>
+                </div>
 
-        <!-- Contact Information -->
-        <input type="text" name="rental[contact][name]" placeholder="Enter contact name (e.g., Sourabh)" required>
-        <input type="text" name="rental[contact][phone]" placeholder="Enter contact phone (e.g., 1234567891)" required>
-        <input type="email" name="rental[contact][email]" placeholder="Enter contact email (optional)">
-        <br><br>
+                <!-- Submit Button -->
+                <button class="btn btn-dark add-btn mb-3 mt-3">Add Rental</button>
 
-        <!-- Submit Button -->
-        <button type="submit">Add Rental</button>
-    </form>
+            </form>
+        </div>
+    </div>
 </body>
-</html>

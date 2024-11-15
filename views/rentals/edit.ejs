@@ -1,60 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Rental</title>
-</head>
+<% layout("/layouts/boilerplate") %>
 <body>
-    <h2>Edit Rental</h2>
-    <form method="post" action="/rentals/<%= rental._id %>/?_method=PUT">
-        <!-- Title -->
-        <input type="text" name="rental[title]"value="<%= rental.title %>" required>
-        <br><br>
+    <div class="row mt-3">
+        <div class="col-8 offset-2">
+            <h3 class="mb-3">Edit Rental</h3>
+            <form method="post" action="/rentals/<%= rental._id %>/?_method=PUT" novalidate class="needs-validation">
+                
+                <!-- Title -->
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title:</label>
+                    <input type="text" name="rental[title]" class="form-control" value="<%= rental.title %>" required>
+                    <div class="invalid-feedback">Please enter a title</div>
+                </div>
 
-        <!-- Description -->
-        <textarea name="rental[description]"required><%= rental.description %></textarea>
-        <br><br>
+                <!-- Description -->
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description:</label>
+                    <textarea name="rental[description]" class="form-control" required><%= rental.description %></textarea>
+                    <div class="invalid-feedback">Please provide a description</div>
+                </div>
 
-        <!-- Location -->
-        <input type="text" name="rental[location][state]" value="<%= rental.location.state %>" required>
-        <input type="text" name="rental[location][pincode]"  value="<%= rental.location.pincode %>" required>
-        <input type="text" name="rental[location][address]"value="<%= rental.location.address %>" required>
-        <br><br>
+                <!-- Location -->
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="address" class="form-label">Address:</label>
+                        <input type="text" name="rental[location][address]" class="form-control" value="<%= rental.location.address %>" required>
+                        <div class="invalid-feedback">Please provide an address</div>
+                    </div>
+                    <div class="mb-3 col-md-4">
+                        <label for="state" class="form-label">State:</label>
+                        <input type="text" name="rental[location][state]" class="form-control" value="<%= rental.location.state %>" required>
+                        <div class="invalid-feedback">Please provide a state</div>
+                    </div>
+                    <div class="mb-3 col-md-4">
+                        <label for="pincode" class="form-label">Pincode:</label>
+                        <input type="text" name="rental[location][pincode]" class="form-control" value="<%= rental.location.pincode %>" required>
+                        <div class="invalid-feedback">Please provide a pincode</div>
+                    </div>
+                </div>
 
-        <!-- Price -->
-        <input type="number" name="rental[price]" value="<%= rental.price %>" required>
-        <br><br>
+                <!-- Price -->
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price (per month):</label>
+                    <input type="number" name="rental[price]" class="form-control" value="<%= rental.price %>" required>
+                    <div class="invalid-feedback">Please provide a valid price</div>
+                </div>
 
-        <!-- Property Type -->
-        <select name="rental[propertyType]" required>
-            <option value="" disabled>Select property type</option>
-            <option value="Hostel" <%= rental.propertyType === 'Hostel' ? 'selected' : '' %>>Hostel</option>
-            <option value="PG" <%= rental.propertyType === 'PG' ? 'selected' : '' %>>PG (Paying Guest)</option>
-            <option value="Single Room" <%= rental.propertyType === 'Single Room' ? 'selected' : '' %>>Single Room</option>
-            <option value="1RK" <%= rental.propertyType === '1RK' ? 'selected' : '' %>>1RK (Room Kitchen)</option>
-            <option value="1BHK" <%= rental.propertyType === '1BHK' ? 'selected' : '' %>>1BHK (Bedroom Hall Kitchen)</option>
-            <option value="2BHK" <%= rental.propertyType === '2BHK' ? 'selected' : '' %>>2BHK (Two Bedroom Hall Kitchen)</option>
-            <option value="3BHK" <%= rental.propertyType === '3BHK' ? 'selected' : '' %>>3BHK (Three Bedroom Hall Kitchen)</option>
-        </select>
-        <br><br>
+                <!-- Property Type -->
+                <div class="mb-3">
+                    <label for="propertyType" class="form-label">Property Type:</label>
+                    <select name="rental[propertyType]" class="form-select" required>
+                        <option value="" disabled>Select property type</option>
+                        <option value="Hostel" <%= rental.propertyType === 'Hostel' ? 'selected' : '' %>>Hostel</option>
+                        <option value="PG" <%= rental.propertyType === 'PG' ? 'selected' : '' %>>PG (Paying Guest)</option>
+                        <option value="Single Room" <%= rental.propertyType === 'Single Room' ? 'selected' : '' %>>Single Room</option>
+                        <option value="1RK" <%= rental.propertyType === '1RK' ? 'selected' : '' %>>1RK (Room Kitchen)</option>
+                        <option value="1BHK" <%= rental.propertyType === '1BHK' ? 'selected' : '' %>>1BHK (Bedroom Hall Kitchen)</option>
+                        <option value="2BHK" <%= rental.propertyType === '2BHK' ? 'selected' : '' %>>2BHK (Two Bedroom Hall Kitchen)</option>
+                        <option value="3BHK" <%= rental.propertyType === '3BHK' ? 'selected' : '' %>>3BHK (Three Bedroom Hall Kitchen)</option>
+                    </select>
+                    <div class="invalid-feedback">Please select a property type</div>
+                </div>
 
-        <!-- Facilities -->
-        <input type="text" name="rental[facilities]"value="<%= rental.facilities %>">
-        <br><br>
+                <!-- Facilities -->
+                <div class="mb-3">
+                    <label for="facilities" class="form-label">Facilities:</label>
+                    <input type="text" name="rental[facilities]" class="form-control" placeholder="Enter available facilities (e.g., Wi-Fi, Laundry)" value="<%= rental.facilities %>">
+                </div>
 
-        <!-- Photos -->
-        <input type="url" name="rental[photos]"value="<%= rental.photos %>" required>
-        <br><br>
+                <!-- Photos -->
+                <div class="mb-3">
+                    <label for="photos" class="form-label">Photo URL:</label>
+                    <input type="url" name="rental[photos]" class="form-control" value="<%= rental.photos %>" required>
+                    <div class="invalid-feedback">Please provide a photo URL</div>
+                </div>
 
-        <!-- Contact Information -->
-        <input type="text" name="rental[contact][name]"  value="<%= rental.contact.name %>" required>
-        <input type="text" name="rental[contact][phone]"  value="<%= rental.contact.phone %>" required>
-        <input type="email" name="rental[contact][email]"value="<%= rental.contact.email %>">
-        <br><br>
+                <!-- Contact Information -->
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="contactName" class="form-label">Contact Name:</label>
+                        <input type="text" name="rental[contact][name]" class="form-control" value="<%= rental.contact.name %>" required>
+                        <div class="invalid-feedback">Please provide a contact name</div>
+                    </div>
+                    <div class="mb-3 col-md-4">
+                        <label for="contactPhone" class="form-label">Contact Phone:</label>
+                        <input type="text" name="rental[contact][phone]" class="form-control" value="<%= rental.contact.phone %>" required>
+                        <div class="invalid-feedback">Please provide a valid phone number</div>
+                    </div>
+                    <div class="mb-3 col-md-4">
+                        <label for="contactEmail" class="form-label">Contact Email:</label>
+                        <input type="email" name="rental[contact][email]" class="form-control" value="<%= rental.contact.email %>">
+                    </div>
+                </div>
 
-        <!-- Submit Button -->
-        <button type="submit">Update Rental</button>
-    </form>
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-dark edit-btn mt-3 mb-3">Update Rental</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
