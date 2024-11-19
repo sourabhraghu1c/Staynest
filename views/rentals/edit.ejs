@@ -33,15 +33,15 @@
                     </div>
                     <div class="mb-3 col-md-4">
                         <label for="pincode" class="form-label">Pincode:</label>
-                        <input type="text" name="rental[location][pincode]" class="form-control" value="<%= rental.location.pincode %>" required>
-                        <div class="invalid-feedback">Please provide a pincode</div>
+                        <input type="text" name="rental[location][pincode]" class="form-control" maxlength="6" pattern="\d{6}" value="<%= rental.location.pincode %>" required>
+                        <div class="invalid-feedback">Please provide a valid pincode</div>
                     </div>
                 </div>
 
                 <!-- Price -->
                 <div class="mb-3">
                     <label for="price" class="form-label">Price (per month):</label>
-                    <input type="number" name="rental[price]" class="form-control" value="<%= rental.price %>" required>
+                    <input type="text" pattern="^[0-9]*\.?[0-9]+$" placeholder="Enter price"name="rental[price]" class="form-control" value="<%= rental.price %>" required>
                     <div class="invalid-feedback">Please provide a valid price</div>
                 </div>
 
@@ -83,7 +83,7 @@
                     </div>
                     <div class="mb-3 col-md-4">
                         <label for="contactPhone" class="form-label">Contact Phone:</label>
-                        <input type="text" name="rental[contact][phone]" class="form-control" value="<%= rental.contact.phone %>" required>
+                        <input type="text" name="rental[contact][phone]" class="form-control" maxlength="10" pattern="\d{10}" value="<%= rental.contact.phone %>" required>
                         <div class="invalid-feedback">Please provide a valid phone number</div>
                     </div>
                     <div class="mb-3 col-md-4">

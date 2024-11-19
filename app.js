@@ -2,6 +2,8 @@ const express= require("express");
 const app=express();
 const mongoose=require("mongoose");
 const Rental =require("./models/rental");
+const wrapAsync=require("./utils/wrapAsync.js");
+const ExpressError=require("./utils/ExpressError.js");
 
 //for templating
 const ejsMate=require("ejs-mate"); 
@@ -43,56 +45,74 @@ app.get("/",(req,res)=>{
     res.send("root is working");
 });
 
+// we use asyncwrap to execute the callback function
 // this is index route
-app.get("/rentals",async(req,res)=>{
+app.get("/rentals", wrapAsync(async (req, res) => {
     const allRentals = await Rental.find({});
-    res.render("./rentals/index.ejs",{allRentals});
-});
+    res.render("./rentals/index.ejs", { allRentals });
+}));
 
-//this is new route
-//make sure to make it above /rentals/:id because it create error and take /new as id
-app.get("/rentals/new",(req,res)=>{
+
+// this is new route
+app.get("/rentals/new", (req, res) => {
     res.render("./rentals/new.ejs");
-})
-
-
-//this is show route
-app.get("/rentals/:id",async(req,res)=>{
-    let {id}=req.params;
-    const rental= await Rental.findById(id);
-    res.render("./rentals/show.ejs",{rental});
 });
 
-//this is create route
-app.post("/rentals",async(req,res)=>{
-    let newRental=new Rental(req.body.rental);
+// this is show route
+app.get("/rentals/:id", wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    const rental = await Rental.findById(id);
+    res.render("./rentals/show.ejs", { rental });
+}));
+
+
+// this is create route
+app.post("/rentals", wrapAsync(async (req, res, next) => {
+    if (!req.body.rental) {
+        throw new ExpressError(400, "Please provide valid data for the rental listing."); //if send through hoopscotch
+    }
+    let newRental = new Rental(req.body.rental);
     await newRental.save();
     console.log("Rental saved");
-    res.redirect("/rentals")
-    });
+    res.redirect("/rentals");
+}));
+
 
 // this is edit route
-app.get("/rentals/:id/edit",async(req,res)=>{
-    let {id}=req.params;
-    const rental= await Rental.findById(id);
-    res.render("./rentals/edit.ejs",{rental});
-});
+app.get("/rentals/:id/edit", wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    const rental = await Rental.findById(id);
+    res.render("./rentals/edit.ejs", { rental });
+}));
+
 
 // this is update route
-app.put("/rentals/:id",async(req,res)=>{
-    let {id}=req.params;
-    await Rental.findByIdAndUpdate(
-        id,
-        {...req.body.rental},
-    )
+app.put("/rentals/:id", wrapAsync(async (req, res) => {
+    if (!req.body.rental) {
+        throw new ExpressError(400, "Please provide valid data for the rental listing.");
+    }
+    let { id } = req.params;
+    await Rental.findByIdAndUpdate(id, { ...req.body.rental });
     res.redirect(`/rentals/${id}`);
-});
+}));
 
-//delete route
-app.delete("/rentals/:id",async(req,res)=>{
-    let {id}=req.params;
+
+// delete route
+app.delete("/rentals/:id", wrapAsync(async (req, res) => {
+    let { id } = req.params;
     await Rental.findByIdAndDelete(id);
     res.redirect("/rentals");
+}));
+
+// Catch-all for undefined routes
+app.all("*", (req, res, next) => {
+    next(new ExpressError(404, "Page not found!"));
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+    let { statusCode = 500, message = "Something went wrong!" } = err;
+    res.status(statusCode).render("error.ejs", { message });
 });
 
 
