@@ -4,7 +4,7 @@
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
         <% for(rental of allRentals){ %>
             <a href="/rentals/<%= rental._id %>" class="rental-link">
-                <div class="card col">
+                <div class=" card rental-card col">
                     <img src="<%= rental.photos %>" class="card-img-top" alt="rental_image" style="height: 20rem;">
                     <!-- card ovelay from bootstrap -->
                         <div class="card-img-overlay"></div>

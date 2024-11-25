@@ -10,7 +10,7 @@ const rentalData = [
       price: 7500,
       propertyType: "PG",
       facilities: "",
-      photos: "https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHRyYXZlbHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+      photos: "https://content.jdmagicbox.com/comp/indore/x5/0731px731.x731.150609200023.l1x5/catalogue/fully-furnished-rooms-on-rent-nakshatra-road-indore-paying-guest-accommodation-for-men-4jza7zq.jpg",
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -28,7 +28,7 @@ const rentalData = [
       price: 4500,
       propertyType: "Hostel",
       facilities: "",
-      photos: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHRyYXZlbHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+      photos: "https://gsh-cdn.sgp1.cdn.digitaloceanspaces.com/assets/img/no-broker-indore/PRT844/room-on-rent-in-indore/pg-in-new-gayatri-nagar_1713342556.jpg",
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -46,7 +46,7 @@ const rentalData = [
       price: 8500,
       propertyType: "PG",
       facilities: "",
-      photos: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG90ZWxzfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+      photos: "https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/f_auto,q_auto/v1641234367/Website/CMS-Uploads/zvwxskz5utrjxxyqxebn.jpg",
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -64,7 +64,7 @@ const rentalData = [
       price: 6000,
       propertyType: "PG",
       facilities: "",
-      photos: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aG90ZWxzfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+      photos: "https://gsh-cdn.sgp1.cdn.digitaloceanspaces.com/assets/img/no-broker-indore/PRT850/room-on-rent-in-indore/pg-in-new-gayatri-nagar_1713343479.jpg",
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -82,7 +82,7 @@ const rentalData = [
       price: 7000,
       propertyType: "Hostel",
       facilities: "",
-      photos: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGhvdGVsc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+      photos: "https://gsh-cdn.sgp1.cdn.digitaloceanspaces.com/assets/img/no-broker-indore/PRT841/room-on-rent-in-indore/pg-in-new-gayatri-nagar_1713339219.jpg",
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -100,7 +100,7 @@ const rentalData = [
       price: 9500,
       propertyType: "PG",
       facilities: "",
-      photos: "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGhvdGVsc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+      photos: "https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/f_auto,q_auto/v1655465539/Website/CMS-Uploads/da1lhffljx9bwndle3db.jpg",
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -118,7 +118,7 @@ const rentalData = [
       price: 5000,
       propertyType: "Hostel",
       facilities: "",
-      photos: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1vdW50YWlufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+      photos: "https://gsh-cdn.sgp1.cdn.digitaloceanspaces.com/assets/img/no-broker-mumbai/PRT555/room-on-rent-in-mumbai/pg-in-santacruz-east_1722852861.jpg",
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -136,7 +136,7 @@ const rentalData = [
       price: 7500,
       propertyType: "PG",
       facilities: "",
-      photos: "https://images.unsplash.com/photo-1622396481328-9b1b78cdd9fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c2t5JTIwdmFjYXRpb258ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
+      photos: "https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/f_auto,q_auto/v1657107830/Website/CMS-Uploads/hhx4llhif8zrc49tjq2b.jpg",
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -154,7 +154,7 @@ const rentalData = [
       price: 7800,
       propertyType: "PG",
       facilities: "",
-      photos: "https://images.unsplash.com/photo-1502784444187-359ac186c5bb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHNreSUyMHZhY2F0aW9ufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+      photos: "https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/f_auto,q_auto/v1663822622/Website/CMS-Uploads/c6hdh58d28xmmver5f3d.jpg",
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -172,7 +172,7 @@ const rentalData = [
       price: 5500,
       propertyType: "Hostel",
       facilities: "",
-      photos: "https://images.unsplash.com/photo-1605892028552-b561b58d6c3f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHBsdW5nJTIwbG9nZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+      photos: "https://play-zelo-production.s3.ap-south-1.amazonaws.com/uploads/center/cover_photo/64c7c1e40fe9100001f8e41f/7___2024_07_09T175023.678.jpg",
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -190,7 +190,7 @@ const rentalData = [
       price: 12000,
       propertyType: "PG",
       facilities: "",
-      photos: "https://images.unsplash.com/photo-1604529394017-7be5a35b2df9?ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfGVufDB8fDB8fHww&ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+      photos: "https://content.jdmagicbox.com/comp/visakhapatnam/p6/0891px891.x891.140613103206.e8p6/catalogue/sri-krishna-pg-mvp-colony-visakhapatnam-hostels-w10kq4qpmo.jpg",
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -208,7 +208,7 @@ const rentalData = [
       price: 9000,
       propertyType: "PG",
       facilities: "",
-      photos: "https://images.unsplash.com/photo-1571695090730-cbd11c2d9fd7?ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfGVufDB8fDB8fHww&ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+      photos: "https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/v1613039998/Website/CMS-Uploads/obn49sqg8hawtm15esaz.jpg",
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -226,7 +226,7 @@ const rentalData = [
       price: 4500,
       propertyType: "Hostel",
       facilities: "",
-      photos: "https://images.unsplash.com/photo-1571703404-20bc3d54d9bb?ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8aG9zdGVsfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+      photos: "https://play-zelo-production.s3.ap-south-1.amazonaws.com/uploads/center/cover_photo/5d9ae2b309ba997ff97ea0bc/Zolo_Mystique_PG_in_Andheri_West_.jpeg",
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -244,7 +244,7 @@ const rentalData = [
       price: 11000,
       propertyType: "PG",
       facilities: "",
-      photos: "https://images.unsplash.com/photo-1584723017745-2fc63f7b0792?ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfGVufDB8fDB8fHww&ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+      photos: "https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/f_auto,q_auto/v1657442622/Website/CMS-Uploads/qdxq0bsjjxw4z7isyru5.jpg",
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -262,7 +262,7 @@ const rentalData = [
       price: 5800,
       propertyType: "Hostel",
       facilities: "",
-      photos: "https://images.unsplash.com/photo-1535568239-d94c7b9c33b1?ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fGJveXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+      photos: "https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/v1684132188/Website/CMS-Uploads/1_tkbh1q.jpg",
       contact: {
         name: "Sourabh",
         phone: "1234567891",

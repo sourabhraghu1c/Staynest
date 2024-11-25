@@ -1,4 +1,7 @@
-const mongoose = require('mongoose');
+//const { ref } = require('joi');
+const mongoose=require("mongoose");
+const schema=mongoose.Schema;
+const User=require("./user.js");
 
 const rentalSchema = new mongoose.Schema({
     title: { type: String, required: true },
@@ -19,8 +22,20 @@ const rentalSchema = new mongoose.Schema({
             required: true,
         },
         email: { type: String }
-    }
+    },
+    reviews:[
+        {
+            type: schema.Types.ObjectId,
+            ref:"Review"
+        },
+    ],
+    owner:{
+            type: schema.Types.ObjectId,
+            ref:"User",
+    },
 });
 
 module.exports = mongoose.model('Rental', rentalSchema);
 
+const Rental = mongoose.model("Rental",rentalSchema);
+module.exports=Rental;

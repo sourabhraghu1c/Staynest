@@ -2,7 +2,14 @@ const express= require("express");
 const app=express();
 const mongoose=require("mongoose");
 const ExpressError=require("./utils/ExpressError.js");
-const rentals=require("./routes/rental.js")
+const rentalRouter=require("./routes/rental.js")
+const userRouter=require("./routes/user.js");
+const reviewRouter=require("./routes/review.js");
+const session=require("express-session");
+const flash=require("connect-flash");
+const passport=require("passport");
+const LocalStrategy = require('passport-local').Strategy;
+const User=require("./models/user.js");
 
 //for templating
 const ejsMate=require("ejs-mate"); 
@@ -39,13 +46,54 @@ app.listen(port,()=>{
     console.log("server connected");
 });
 
+const sessionOptions={
+    secret:"supersecretcode",
+    resave:false,
+    saveUninitialized:true,
+    cookie:{
+        expires: Date.now()+7*24*60*60*1000,  //session expire in 7 days
+        maxAge:7*24*60*60*1000,
+        httpOnly:true,
+    },
+};
+
+app.use(session(sessionOptions));
+app.use(flash());
+
+// we use passport here to make sure that is also use sessions
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
 app.get("/",(req,res)=>{
     res.send("root is working");
 });
 
+app.use((req,res,next)=>{
+    res.locals.success=req.flash("success");
+    res.locals.error=req.flash("error");
+    res.locals.currUser=req.user;
+    next();
+});
+
+// app.get("/demouser",async(req,res)=>{
+//     let fakeuser=new User({
+//         email:"fakeuser@gmail.com",
+//         username:"fake-bitch",
+//     });
+//     let registeredUser=await User.register(fakeuser,"fake-bitch123");
+//     res.send(registeredUser);
+// });
+
+app.use("/rentals",rentalRouter);
+app.use("/rentals/:id/reviews",reviewRouter);
+app.use("/",userRouter);
 
 
-app.use("/rentals",rentals)
+
 
 // Catch-all for undefined routes
 app.all("*", (req, res, next) => {
