@@ -121,3 +121,12 @@ body{
     margin-left: 0.5rem;
     font-size: 0.95rem;
 }
+
+
+/* map */
+
+#map {
+    width: 90vh;
+    height: 400px;
+    background: grey;
+}

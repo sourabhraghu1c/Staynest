@@ -10,7 +10,10 @@ const rentalData = [
       price: 7500,
       propertyType: "PG",
       facilities: "",
-      photos: "https://content.jdmagicbox.com/comp/indore/x5/0731px731.x731.150609200023.l1x5/catalogue/fully-furnished-rooms-on-rent-nakshatra-road-indore-paying-guest-accommodation-for-men-4jza7zq.jpg",
+      photos:{
+        url:"https://content.jdmagicbox.com/comp/indore/x5/0731px731.x731.150609200023.l1x5/catalogue/fully-furnished-rooms-on-rent-nakshatra-road-indore-paying-guest-accommodation-for-men-4jza7zq.jpg",
+        filename:"rentalImage",
+      },
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -28,7 +31,10 @@ const rentalData = [
       price: 4500,
       propertyType: "Hostel",
       facilities: "",
-      photos: "https://gsh-cdn.sgp1.cdn.digitaloceanspaces.com/assets/img/no-broker-indore/PRT844/room-on-rent-in-indore/pg-in-new-gayatri-nagar_1713342556.jpg",
+      photos:{
+        url:"https://gsh-cdn.sgp1.cdn.digitaloceanspaces.com/assets/img/no-broker-indore/PRT844/room-on-rent-in-indore/pg-in-new-gayatri-nagar_1713342556.jpg",
+        filename:"rentalImage",
+      },
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -46,7 +52,10 @@ const rentalData = [
       price: 8500,
       propertyType: "PG",
       facilities: "",
-      photos: "https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/f_auto,q_auto/v1641234367/Website/CMS-Uploads/zvwxskz5utrjxxyqxebn.jpg",
+      photos:{
+        url:"https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/f_auto,q_auto/v1641234367/Website/CMS-Uploads/zvwxskz5utrjxxyqxebn.jpg",
+        filename:"rentalImage",
+      },
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -64,7 +73,10 @@ const rentalData = [
       price: 6000,
       propertyType: "PG",
       facilities: "",
-      photos: "https://gsh-cdn.sgp1.cdn.digitaloceanspaces.com/assets/img/no-broker-indore/PRT850/room-on-rent-in-indore/pg-in-new-gayatri-nagar_1713343479.jpg",
+      photos:{
+        url:"https://gsh-cdn.sgp1.cdn.digitaloceanspaces.com/assets/img/no-broker-indore/PRT850/room-on-rent-in-indore/pg-in-new-gayatri-nagar_1713343479.jpg",
+        filename:"rentalImage",
+      },
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -82,7 +94,10 @@ const rentalData = [
       price: 7000,
       propertyType: "Hostel",
       facilities: "",
-      photos: "https://gsh-cdn.sgp1.cdn.digitaloceanspaces.com/assets/img/no-broker-indore/PRT841/room-on-rent-in-indore/pg-in-new-gayatri-nagar_1713339219.jpg",
+      photos:{
+        url:"https://gsh-cdn.sgp1.cdn.digitaloceanspaces.com/assets/img/no-broker-indore/PRT841/room-on-rent-in-indore/pg-in-new-gayatri-nagar_1713339219.jpg",
+        filename:"rentalImage",
+      },
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -100,7 +115,10 @@ const rentalData = [
       price: 9500,
       propertyType: "PG",
       facilities: "",
-      photos: "https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/f_auto,q_auto/v1655465539/Website/CMS-Uploads/da1lhffljx9bwndle3db.jpg",
+      photos:{
+        url:"https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/f_auto,q_auto/v1655465539/Website/CMS-Uploads/da1lhffljx9bwndle3db.jpg",
+        filename:"rentalImage",
+      },
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -118,7 +136,10 @@ const rentalData = [
       price: 5000,
       propertyType: "Hostel",
       facilities: "",
-      photos: "https://gsh-cdn.sgp1.cdn.digitaloceanspaces.com/assets/img/no-broker-mumbai/PRT555/room-on-rent-in-mumbai/pg-in-santacruz-east_1722852861.jpg",
+      photos:{
+        url:"https://gsh-cdn.sgp1.cdn.digitaloceanspaces.com/assets/img/no-broker-mumbai/PRT555/room-on-rent-in-mumbai/pg-in-santacruz-east_1722852861.jpg",
+        filename:"rentalImage",
+      },
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -136,7 +157,10 @@ const rentalData = [
       price: 7500,
       propertyType: "PG",
       facilities: "",
-      photos: "https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/f_auto,q_auto/v1657107830/Website/CMS-Uploads/hhx4llhif8zrc49tjq2b.jpg",
+      photos:{
+        url:"https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/f_auto,q_auto/v1657107830/Website/CMS-Uploads/hhx4llhif8zrc49tjq2b.jpg",
+        filename:"rentalImage",
+      },
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -154,7 +178,10 @@ const rentalData = [
       price: 7800,
       propertyType: "PG",
       facilities: "",
-      photos: "https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/f_auto,q_auto/v1663822622/Website/CMS-Uploads/c6hdh58d28xmmver5f3d.jpg",
+      photos:{
+        url:"https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/f_auto,q_auto/v1663822622/Website/CMS-Uploads/c6hdh58d28xmmver5f3d.jpg",
+        filename:"rentalImage",
+      },
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -172,7 +199,10 @@ const rentalData = [
       price: 5500,
       propertyType: "Hostel",
       facilities: "",
-      photos: "https://play-zelo-production.s3.ap-south-1.amazonaws.com/uploads/center/cover_photo/64c7c1e40fe9100001f8e41f/7___2024_07_09T175023.678.jpg",
+      photos:{
+        url:"https://play-zelo-production.s3.ap-south-1.amazonaws.com/uploads/center/cover_photo/64c7c1e40fe9100001f8e41f/7___2024_07_09T175023.678.jpg",
+        filename:"rentalImage",
+      },
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -190,7 +220,10 @@ const rentalData = [
       price: 12000,
       propertyType: "PG",
       facilities: "",
-      photos: "https://content.jdmagicbox.com/comp/visakhapatnam/p6/0891px891.x891.140613103206.e8p6/catalogue/sri-krishna-pg-mvp-colony-visakhapatnam-hostels-w10kq4qpmo.jpg",
+      photos:{
+        url:"https://content.jdmagicbox.com/comp/visakhapatnam/p6/0891px891.x891.140613103206.e8p6/catalogue/sri-krishna-pg-mvp-colony-visakhapatnam-hostels-w10kq4qpmo.jpg",
+        filename:"rentalImage",
+      },
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -208,7 +241,10 @@ const rentalData = [
       price: 9000,
       propertyType: "PG",
       facilities: "",
-      photos: "https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/v1613039998/Website/CMS-Uploads/obn49sqg8hawtm15esaz.jpg",
+      photos:{
+        url:"https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/v1613039998/Website/CMS-Uploads/obn49sqg8hawtm15esaz.jpg",
+        filename:"rentalImage",
+      },
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -226,7 +262,10 @@ const rentalData = [
       price: 4500,
       propertyType: "Hostel",
       facilities: "",
-      photos: "https://play-zelo-production.s3.ap-south-1.amazonaws.com/uploads/center/cover_photo/5d9ae2b309ba997ff97ea0bc/Zolo_Mystique_PG_in_Andheri_West_.jpeg",
+      photos:{
+        url:"https://play-zelo-production.s3.ap-south-1.amazonaws.com/uploads/center/cover_photo/5d9ae2b309ba997ff97ea0bc/Zolo_Mystique_PG_in_Andheri_West_.jpeg",
+        filename:"rentalImage",
+      },
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -244,7 +283,10 @@ const rentalData = [
       price: 11000,
       propertyType: "PG",
       facilities: "",
-      photos: "https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/f_auto,q_auto/v1657442622/Website/CMS-Uploads/qdxq0bsjjxw4z7isyru5.jpg",
+      photos:{
+        url:"https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/f_auto,q_auto/v1657442622/Website/CMS-Uploads/qdxq0bsjjxw4z7isyru5.jpg",
+        filename:"rentalImage",
+      },
       contact: {
         name: "Sourabh",
         phone: "1234567891",
@@ -262,7 +304,10 @@ const rentalData = [
       price: 5800,
       propertyType: "Hostel",
       facilities: "",
-      photos: "https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/v1684132188/Website/CMS-Uploads/1_tkbh1q.jpg",
+      photos:{
+        url:"https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/v1684132188/Website/CMS-Uploads/1_tkbh1q.jpg",
+        filename:"rentalImage",
+      },
       contact: {
         name: "Sourabh",
         phone: "1234567891",

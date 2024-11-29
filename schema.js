@@ -9,10 +9,13 @@ module.exports. rentalSchema = Joi.object({
             pincode: Joi.string().required(),
             address: Joi.string().required(),
         }).required(),
-        price: Joi.number().required().min(0 ),
+        price: Joi.number().required().min(0),
         propertyType: Joi.string().required(),
         facilities: Joi.string().allow('').optional(),
-        photos: Joi.string().required(),
+        photos: Joi.object({
+            url: Joi.string().required(),
+            filename: Joi.string().required(),
+        }),
         contact: Joi.object({
             name: Joi.string().required(),
             phone: Joi.string().required(),

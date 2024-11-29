@@ -3,8 +3,8 @@
 <body>
     <div class="row mt-3">
         <div class="col-8 offset-2">
-            <h2 class="mb-3">Add New Rental</h2>
-            <form action="/rentals" method="POST" novalidate class="needs-validation">
+            <h3 class="mb-3">Add New Rental</h3>
+            <form action="/rentals" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
                 
                 <!-- Title -->
                 <div class="mb-3">
@@ -69,11 +69,18 @@
                     <input type="text" name="rental[facilities]" class="form-control" placeholder="Enter available facilities (e.g., Wi-Fi, Laundry)">
                 </div>
 
-                <!-- Photos -->
+                <!-- Photos
                 <div class="mb-3">
                     <label for="photos" class="form-label">Photo URL:</label>
                     <input type="url" name="rental[photos]" class="form-control" placeholder="Enter the photo URL" required>
                     <div class="invalid-feedback">Please provide a photo URL</div>
+                </div> -->
+
+                <!-- Photos file -->
+                <div class="mb-3">
+                    <label for="photos" class="form-label">Upload Rental Image:</label>
+                    <input type="file" name="rental[photos]" class="form-control" required>
+                    <div class="invalid-feedback">please upload a Rental image</div>
                 </div>
 
                 <!-- Contact Information -->

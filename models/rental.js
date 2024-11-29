@@ -15,7 +15,10 @@ const rentalSchema = new mongoose.Schema({
     price: { type: Number, required: true },
     propertyType: { type: String, required: true },
     facilities: { type: String },
-    photos: { type: String,required: true },
+    photos: { 
+        url: { type: String, required: true }, 
+        filename:{ type: String, required: true },
+    },
     contact: {
         name: { type: String, required: true },
         phone: { type: String,

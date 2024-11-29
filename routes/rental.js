@@ -6,78 +6,34 @@ const ExpressError=require("../utils/ExpressError.js");
 const {rentalSchema}=require("../schema.js")
 //to create router
 const router=express.Router();
-
-
-
+//controllers
+const rentalController=require("../controllers/rental.js");
 //middleware
-
 const {isLoggedIn, isOwner,validateRental}=require("../middleware.js");
 
+//multer files from form
+const multer  = require('multer')
+const {storage}=require("../cloudconfig.js");
+const upload = multer({storage});
 
 
-// this is index route
-router.get("/", wrapAsync(async (req, res) => {
-    const allRentals = await Rental.find({});
-    res.render("./rentals/index.ejs", { allRentals });
-}));
 
-
+router
+.route("/")
+.get(wrapAsync(rentalController.index))
+.post(isLoggedIn,upload.single("rental[photos]"),validateRental,wrapAsync(rentalController.createRental));
+// 
 // this is new route
-router.get("/new",isLoggedIn, (req, res) => {
-    res.render("./rentals/new.ejs");
-});
+router.get("/new",isLoggedIn,rentalController.renderNewForm);
 
-// this is show route
-router.get("/:id", wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    const rental= await Rental.findById(id).populate( { path:"reviews",populate:{path:"author"} } ).populate("owner");
-    if(!rental){
-        req.flash("error","Rental not exist!");
-        res.redirect("/rentals");
-    }
-    res.render("./rentals/show.ejs", { rental });
-}));
-
-
-// this is create route
-router.post("/",isLoggedIn,validateRental,wrapAsync(async (req, res, next) => {
-    let newRental = new Rental(req.body.rental);
-    newRental.owner=req.user._id;
-    await newRental.save();
-    req.flash("success","New rental created!");
-    res.redirect("/rentals");
-}));
-
+router //this rout must below the /new as it take new also as a id
+.route("/:id")
+.get(wrapAsync(rentalController.showRental))
+.put(isLoggedIn,isOwner,upload.single("rental[photos]"),validateRental, wrapAsync(rentalController.updateRental))
+.delete(isLoggedIn,isOwner,wrapAsync(rentalController.destroyRental));
 
 // this is edit route
-router.get("/:id/edit",isLoggedIn,isOwner, wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    const rental = await Rental.findById(id);
-    if(!rental){
-        req.flash("error","Rental not exist!");
-        res.redirect("/rentals");
-    }
-    res.render("./rentals/edit.ejs", { rental });
-}));
-
-
-// this is update route
-router.put("/:id",isLoggedIn,isOwner,validateRental, wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    await Rental.findByIdAndUpdate(id, { ...req.body.rental });
-    res.redirect(`/rentals/${id}`);
-}));
-
-
-router.delete("/:id",isLoggedIn,isOwner,wrapAsync(async (req, res) => {
-    const rental = await Rental.findById(req.params.id);
-    if (rental) {
-        await Review.deleteMany({ _id: { $in: rental.reviews } }); // Delete associated reviews
-        await Rental.findByIdAndDelete(req.params.id); // Delete rental
-    }
-    req.flash("success", "Successfully deleted rental and associated reviews.");
-    res.redirect("/rentals");
-}));
+router.get("/:id/edit",isLoggedIn,isOwner, wrapAsync(rentalController.editRental));
 
 
 module.exports=router;
