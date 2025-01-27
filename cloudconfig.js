@@ -16,8 +16,18 @@ const storage = new CloudinaryStorage({
     },
 });
 
+// Custom storage for user profile images
+const userProfileStorage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: "Staynest_DEV/UserProfile",
+        allowed_formats: ["png", "jpg", "jpeg"],
+    },
+});
+
 
 module.exports={
     cloudinary,
     storage,
+    userProfileStorage,
 }

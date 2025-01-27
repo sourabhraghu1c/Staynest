@@ -9,7 +9,7 @@ body{
 }
 
 .navbar{
-    height: 5rem;
+    height: 4rem;
     background-color: white;
 }
 
@@ -21,6 +21,244 @@ body{
 .nav-link{
     color: #222222 !important;
 }
+
+/* Offcanvas Menu */
+.custom-offcanvas {
+    width: 10%; 
+    height: 82vh; 
+    border-radius: 10px; /* Rounded corners */
+    overflow-y: auto; /* Scrollable content if height is exceeded */
+    position: fixed; /* Fixed to the viewport */
+    right: 0; /* Positioned on the right */
+    top: 0; /* Aligned to the top */
+    transform: translateX(100%); /* Initially offscreen */
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    opacity: 0; /* Initially hidden */
+}
+
+.custom-offcanvas.show {
+    transform: translateX(0); /* Slide into view */
+    opacity: 1; /* Fully visible */
+}
+
+/* search styling */
+/* Wrapper for the input to position the filter button inside */
+.input-container {
+    position: relative;
+}
+
+/* Filter button inside the input */
+.filter-btn {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    background-color: maroon !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 50% !important;
+    font-size: 0.9rem; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+/* Adjust input field to leave space for filter button */
+.search-inp {
+    padding-left: 2.5rem !important; /* Space for the filter button */
+    border-radius: 25px 0 0 25px !important;
+    font-size: 1.1rem !important;
+    width: 23rem !important;
+}
+
+/* Style the search button */
+.search-btn {
+    background-color: maroon !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 0 25px 25px 0px !important;
+    padding: 0.5rem 1rem !important;
+    font-size: 1rem !important;
+    height: 98% !important;
+}
+
+.search-btn:active {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black;
+}
+
+.search-btn i {
+    display: inline;
+    margin-right: 0.5rem;
+}
+
+/* Remove focus effects */
+.search-inp:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: maroon !important;
+}
+
+/* Custom offcanvas that slides from below the navbar */
+.offcanvas-custom {
+    top: 56px !important; /* Adjust to position it just below the navbar */
+    width: 18% !important; /* Set the width */
+    max-height: 70vh !important; /* Adjust the height of the offcanvas */
+    height: auto !important;
+    padding: 1rem !important;
+    position: fixed !important; /* Fix it at the top */
+    left: 40% !important; /* Position it horizontally in the center */
+    transform: translateX(-50%) !important; /* Ensure it is centered exactly */
+    z-index: 1050 !important; /* Ensure it stays above other elements */
+}
+
+.filter-section {
+    margin-bottom: 0.5rem !important;
+}
+
+/* Hover effect for buttons */
+.price-btn:hover, 
+.property-btn:hover {
+    background-color: maroon !important;
+    color: white !important;
+}
+
+/* normal state for buttons */
+.price-btn{
+    margin-bottom: 0.3rem !important;
+    width: 8rem !important;
+    font-size: 0.7rem !important;
+}
+.property-btn {
+    margin-bottom: 0.3rem !important;
+    width: 5rem !important;
+    font-size: 0.7rem !important;
+}
+
+/* Selected state for buttons */
+.price-btn.selected, 
+.property-btn.selected {
+    background-color: maroon !important;
+    color: white !important;
+}
+
+/* Apply button */
+#applyFiltersButton {
+    background-color: maroon;
+    color: white;
+    margin-left: 8rem;
+    margin-top: 0.4rem;
+}
+#applyFilters{
+    height:5vh;
+}
+
+#applyFiltersButton:hover{
+    border: 2px solid maroon;
+}
+
+
+
+
+
+/* Profile Image */
+.offcanvas-profile-image img  {
+    width: 180px; 
+    height: 180px;
+    border: 3px solid black; /* Allows for a gradient border effect */
+    border-radius: 50%; /* Keeps the image circular */
+    object-fit: cover; /* Maintains aspect ratio */
+}
+/* Backdrop Animation */
+.offcanvas-backdrop {
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0; /* Initially invisible */
+}
+
+.offcanvas-backdrop.show {
+    opacity: 0.5; /* Semi-transparent when shown */
+}
+
+/* General Styling for Options */
+.profile-option a,
+.info-links a,
+.rentals-option a,
+.logout-option a {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #222222;
+    border-radius: 8px; /* Adds a rounded look to the options */
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth animation */
+}
+
+/* Hover Glow Effect */
+.profile-option a:hover,
+.info-links a:hover,
+.rentals-option a:hover,
+.logout-option a:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 10px rgba(106, 90, 205, 0.5); /* Adds the glow effect */
+    transform: translateY(-3px); /* Slight lift effect on hover */
+    background-color: #f9f9f9; /* Optional: light background on hover */
+}
+
+/* Icon Spacing */
+.profile-option a i,
+.info-links a i,
+.rentals-option a i,
+.logout-option a i {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.user-profile{
+    height:2.5rem;
+    width:2.5rem;
+    border: 2px solid #222222;
+    border-radius: 50%;
+}
+
+/* Profile Settings */
+.profile-image-container {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto; /* Centers the image horizontally */
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid black;
+}
+
+.add-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: black;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+
 
 /* footer */
 
@@ -100,6 +338,12 @@ body{
     border: none !important;
 }
 
+#update-profile{
+    background-color:maroon !important;
+    border: none !important;
+    color: white;
+}
+
 /* show page styling */
 .show-img{
     height: 30vh;
@@ -130,3 +374,11 @@ body{
     height: 400px;
     background: grey;
 }
+
+
+
+
+
+
+
+

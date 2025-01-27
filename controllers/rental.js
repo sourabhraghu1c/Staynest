@@ -72,3 +72,36 @@ module.exports.destroyRental=async (req, res) => {
     req.flash("success", "Successfully deleted rental");
     res.redirect("/rentals");
 }
+
+module.exports.searchRentals=async (req, res) => {
+    const { address, price_range, property_type } = req.query;
+    try {
+    // Initialize a query object
+        const query = {};
+    // Add filters based on the search inputs
+        if (address) {
+            query["location.address"] = { $regex: address, $options: "i" }; // Case-insensitive regex search
+        }
+        if (price_range) {
+            const [min, max] = price_range.split("-").map(Number);
+        if (!isNaN(min)) {
+            query.price = { $gte: min }; // Minimum price
+            if (!isNaN(max)) {
+              query.price.$lte = max; // Maximum price if it exists
+            }
+        } else {
+            console.warn("Invalid price range format:", price_range);
+        }
+        }
+        if (property_type) {
+            query.propertyType = property_type;
+        }
+        // Fetch rentals matching the query
+        const allRentals = await Rental.find(query);
+        // Render the results in the `index.ejs` template
+        res.render("./rentals/index.ejs", { allRentals });
+    } catch (error) {
+        console.error("Error fetching rentals:", error);
+        res.status(500).send("Internal Server Error");
+    }
+}

@@ -1,24 +1,30 @@
+
 <% layout("/layouts/boilerplate") %>
 <body>
-    <h3> All Rentals</h3>
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
-        <% for(rental of allRentals){ %>
-            <a href="/rentals/<%= rental._id %>" class="rental-link">
-                <div class=" card rental-card col">
-                    <img src="<%= rental.photos.url %>" class="card-img-top" alt="rental_image" style="height: 20rem;">
-                    <!-- card ovelay from bootstrap -->
+    <div class="mt-2 row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+        <% if (allRentals.length > 0) { %>
+            <% for (rental of allRentals) { %>
+                <a href="/rentals/<%= rental._id %>" class="rental-link">
+                    <div class="card rental-card col">
+                        <img src="<%= rental.photos.url %>" class="card-img-top" alt="rental_image" style="height: 20rem;">
+                        <!-- card overlay from bootstrap -->
                         <div class="card-img-overlay"></div>
-                    <!--  -->
-                    <div class="card-body">
-                        <p class="card-text">
-                            <b><%= rental.title %></b>
-                            <br>
-                            &#8377;<%= rental.price.toLocaleString("en-IN")%>/month
-                        </p>
+                        <div class="card-body">
+                            <p class="card-text">
+                                <b><%= rental.title %></b>
+                                <br>
+                                &#8377;<%= rental.price.toLocaleString("en-IN") %>/month
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
             <% } %>
+        <% } else { %>
+            <div class="col-12 text-center mt-5">
+                <h2 class="text-muted">No Rentals Available </h2>
+                <p class="text-muted">Please Explore Other options!</p>
+            </div>
+        <% } %>
     </div>
 </body>
 </html>

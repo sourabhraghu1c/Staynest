@@ -1,27 +1,142 @@
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
     <div class="container-fluid">
-
         <a class="navbar-brand" href="/rentals"><i class="fa-regular fa-compass"></i></a>
-        <!-- to change the icon you can change this i tag in the above line -->
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
-        <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <!-- add more options here in future  -->
-                <a class="nav-link" href="/rentals">All Rentals</a>
-                <a class="nav-link" href="/rentals/new">Add New Rental</a>
+                <a class="nav-link mt-1" href="/rentals">Explore</a>
             </div>
+            <!-- Search bar with filter button -->
             <div class="navbar-nav ms-auto">
+                <form class="d-flex" role="search" action="/rentals/search" method="get">
+                    <div class="input-container">
+                    <button class="filter-btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#filterOffcanvas">
+                    <i class="fas fa-sliders-h"></i>
+                    </button>
+                    <input class="form-control search-inp" type="search" name="address" placeholder="Search Rentals" required>
+                    </div>
+                    <button class="btn  search-btn" type="submit">
+                    <i class="fas fa-search"></i> Search
+                    </button>
+            <!-- Hidden inputs for filter data -->
+                    <input type="hidden" name="price_range" id="priceRange">
+                    <input type="hidden" name="property_type" id="propertyType">
+                </form>
+            </div>
+
+
+            <div class="navbar-nav ms-auto">
+                <a class=" me-3 mt-1 nav-link" href="/rentals/new">Add Rental</a>
                 <% if(!currUser){ %>
-                <a class="nav-link" href="/signup">signup</a>
-                <a class="nav-link" href="/login">login</a>
+                <a class="nav-link mt-1" href="/signup"><b>Sign up</b></a>
+                <a class="nav-link mt-1" href="/login"><b>Log in</b></a>
                 <% } %>
                 <% if(currUser){ %>
-                <a class="nav-link" href="/logout">logout</a>
+                <a class="navbar-brand" data-bs-toggle="offcanvas" href="#offcanvasProfile" role="button">
+                    <img class="user-profile" src="<%= currUser.profileImage %>" alt="User Profile">
+                </a>
                 <% } %>
             </div>
         </div>
     </div>
 </nav>
+
+<!-- Offcanvas for Filter -->
+<div class="offcanvas offcanvas-custom" tabindex="-1" id="filterOffcanvas" aria-labelledby="filterOffcanvasLabel">
+    <div class="offcanvas-header">
+        <h5 id="filterOffcanvasLabel">Filter Options</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <!-- Price Range Filter -->
+        <div class="filter-section">
+            <h6>Price Range</h6>
+            <div class="price-range-buttons">
+                <input type="radio" class="btn-check" name="price" id="price1" value="0-5000" autocomplete="off" data-price="0-5000">
+                <label class="btn price-btn" for="price1">Below ₹5000</label>
+                <input type="radio" class="btn-check" name="price" id="price2" value="5000-8000" autocomplete="off" data-price="5000-8000">
+                <label class="btn price-btn" for="price2">₹5000 - ₹8000</label>
+                <input type="radio" class="btn-check" name="price" id="price3" value="8000-12000" autocomplete="off" data-price="8000-12000">
+                <label class="btn price-btn" for="price3">₹8000 - ₹12000</label>
+                <input type="radio" class="btn-check" name="price" id="price4" value="12000-15000" autocomplete="off" data-price="12000-15000">
+                <label class="btn price-btn" for="price4">₹12000 - ₹15000</label>
+                <!-- to handle the case of price more then 15000 max price is 3000000 per month  -->
+                <input type="radio" class="btn-check" name="price" id="price5" value="15000-3000000" autocomplete="off" data-price="15000-3000000"> 
+                <label class="btn price-btn" for="price5">Above ₹15000</label>
+            </div>
+        </div>
+        <hr>
+        <!-- Property Type Filter -->
+        <div class="filter-section">
+            <h6>Property Type</h6>
+            <div class="property-type-buttons">
+                <input type="radio" class="btn-check" name="property" id="property1" value="1RK" autocomplete="off" data-property="1RK">
+                <label class="btn property-btn" for="property1">1RK</label>
+                <input type="radio" class="btn-check" name="property" id="property2" value="1BHK" autocomplete="off" data-property="1BHK">
+                <label class="btn property-btn" for="property2">1BHK</label>
+                <input type="radio" class="btn-check" name="property" id="property3" value="2BHK" autocomplete="off" data-property="2BHK">
+                <label class="btn property-btn" for="property3">2BHK</label>
+                <input type="radio" class="btn-check" name="property" id="property4" value="3BHK" autocomplete="off" data-property="3BHK">
+                <label class="btn property-btn" for="property4">3BHK</label>
+                <input type="radio" class="btn-check" name="property" id="property5" value="PG" autocomplete="off" data-property="PG">
+                <label class="btn property-btn" for="property5">PG</label>
+                <input type="radio" class="btn-check" name="property" id="property6" value="Hostel" autocomplete="off" data-property="Hostel">
+                <label class="btn property-btn" for="property6">Hostel</label>
+                <input type="radio" class="btn-check" name="property" id="property7" value="Single Room" autocomplete="off" data-property="Single Room">
+                <label class="btn property-btn" for="property7">Single Room</label>
+            </div>
+        </div>
+    </div>
+    <div id="applyFilters">
+        <button type="button" class="btn" id="applyFiltersButton" data-bs-dismiss="offcanvas">Apply</button>
+    </div>
+</div>
+
+
+
+<!-- User Profile Offcanvas -->
+<% if(currUser){ %>
+<div class="offcanvas offcanvas-end custom-offcanvas" tabindex="-1" id="offcanvasProfile" aria-labelledby="offcanvasProfileLabel">
+    <div class="offcanvas-header">
+        <h5 id="offcanvasProfileLabel">Your Profile</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column align-items-center">
+        <div class="offcanvas-profile-image mb-3">
+            <img src="<%= currUser.profileImage %>" alt="User Profile" class="rounded-circle img-fluid">
+        </div>
+        <div class="username mb-4">
+            <h5 class="text-center"><%= currUser.username %></h5>
+        </div>
+        <div class="profile-option w-100">
+            <a href="/profile-settings" class="d-flex align-items-center py-2 px-3 text-decoration-none text-dark">
+                <i class="fa-solid fa-gear me-2"></i> Profile Settings
+            </a>
+        </div>
+        <div class="rentals-option w-100">
+            <a href="/user-rentals" class="d-flex align-items-center py-2 px-3 text-decoration-none text-dark">
+                <i class="fa-solid fa-home me-2"></i> My Rentals
+            </a>
+        </div>
+        <div class="info-links w-100">
+            <a href="/about-us" class="d-flex align-items-center py-2 px-3 text-decoration-none text-dark">
+                <i class="fa-solid fa-info-circle me-2"></i> About Us
+            </a>
+        </div>
+        <div class="info-links w-100">
+            <a href="/terms" class="d-flex align-items-center py-2 px-3 text-decoration-none text-dark">
+                <i class="fa-solid fa-file-contract me-2"></i> Terms & Conditions
+            </a>
+        </div>
+        <div class="logout-option w-100">
+            <a href="/logout" class="d-flex align-items-center py-2 px-3 text-decoration-none text-dark">
+                <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+            </a>
+        </div>
+    </div>
+</div>
+<% } %>
+

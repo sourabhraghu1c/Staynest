@@ -26,14 +26,19 @@ router
 // this is new route
 router.get("/new",isLoggedIn,rentalController.renderNewForm);
 
+//for search functionality
+router.get("/search", wrapAsync(rentalController.searchRentals));
+
 router //this rout must below the /new as it take new also as a id
 .route("/:id")
-.get(wrapAsync(rentalController.showRental))
+.get(isLoggedIn, wrapAsync(rentalController.showRental)) 
 .put(isLoggedIn,isOwner,upload.single("rental[photos]"),validateRental, wrapAsync(rentalController.updateRental))
 .delete(isLoggedIn,isOwner,wrapAsync(rentalController.destroyRental));
 
 // this is edit route
 router.get("/:id/edit",isLoggedIn,isOwner, wrapAsync(rentalController.editRental));
+
+
 
 
 module.exports=router;
