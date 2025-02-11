@@ -1,7 +1,7 @@
-const Rental =require("./models/rental.js");
-const Review =require("./models/review.js");
-const ExpressError=require("./utils/ExpressError.js");
-const {rentalSchema,reviewSchema}=require("./schema.js")
+const Rental =require("../models/rental.js");
+const Review =require("../models/review.js");
+const ExpressError=require("../utils/ExpressError.js");
+const {rentalSchema,reviewSchema}=require("../validations/schema.js")
 
 
 module.exports.isLoggedIn=(req,res,next)=>{

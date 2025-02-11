@@ -3,17 +3,19 @@ const Rental =require("../models/rental.js");
 const wrapAsync=require("../utils/wrapAsync.js");
 const Review=require("../models/review.js");
 const ExpressError=require("../utils/ExpressError.js");
-const {rentalSchema}=require("../schema.js")
+// const {rentalSchema}=require("../schema.js");
+const {rentalSchema}=require("../validations/schema.js");
 //to create router
 const router=express.Router();
 //controllers
 const rentalController=require("../controllers/rental.js");
 //middleware
-const {isLoggedIn, isOwner,validateRental}=require("../middleware.js");
+// const {isLoggedIn, isOwner,validateRental}=require("../middleware.js");
+const {isLoggedIn, isOwner,validateRental}=require("../Middlewares/middleware.js");
 
 //multer files from form
 const multer  = require('multer')
-const {storage}=require("../cloudconfig.js");
+const {storage}=require("../config/cloudconfig.js");
 const upload = multer({storage});
 
 

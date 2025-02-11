@@ -53,11 +53,11 @@ const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js");
 const passport = require("passport");
-const { isLoggedIn, saveRedirectUrl } = require("../middleware.js");
+const { isLoggedIn, saveRedirectUrl } = require("../Middlewares/middleware.js");
 const userController = require("../controllers/user.js");
 
 const multer = require("multer");
-const { userProfileStorage } = require("../cloudconfig.js");
+const { userProfileStorage } = require("../config/cloudconfig.js");
 
 // Multer storage configuration for handling profile image uploads
 const uploadUserProfile = multer({ storage: userProfileStorage }); // Corrected multer storage configuration

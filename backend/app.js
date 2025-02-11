@@ -23,14 +23,14 @@ app.engine("ejs",ejsMate);
 //to connect different folders
 const path=require("path");
 app.set("view engine","ejs");
-app.set("views",path.join(__dirname,"views"));
+app.set('views', path.join(__dirname, '../frontend/views'));
 
 //to override methods of html forms
 const methodOverride=require("method-override");
 app.use(methodOverride('_method'));
 
 
-app.use(express.static(path.join(__dirname,"/public"))); // to use the files of public folder
+app.use(express.static(path.join(__dirname, '../frontend/public')));  // to use the files of public folder
 
 //to parse the data from request
 app.use(express.urlencoded({extended:true}));
