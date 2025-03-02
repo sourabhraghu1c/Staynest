@@ -1,0 +1,70 @@
+/* Footer Styles */
+.footer {
+  display: flex;
+  width: 100%; /* Ensures full viewport width */
+  background-color: #efefef;
+  bottom: 0;
+  margin: 0;
+
+}
+
+.f-info {
+  text-align: center;
+  display: flex;
+  width: 100%;
+  height: 8rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+/* Social Media Icons */
+.f-info-socials {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.social-icon {
+  font-size: 1.8rem;
+  color: #222;
+  transition: color 0.3s ease-in-out;
+}
+
+.social-icon:hover {
+  color: #555;
+}
+
+/* Footer Brand Name */
+.f-info-brand {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Footer Links */
+.f-info-links {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.f-info-links a {
+  text-decoration: none;
+  color: #222;
+  font-size: 1rem;
+}
+
+.f-info-links a:hover {
+  text-decoration: underline;
+  color: #555;
+}

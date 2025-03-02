@@ -1,0 +1,18 @@
+.signup-section {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.signup-btn {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.signup-btn:hover {
+    background-color: darkgreen;
+}

@@ -1,0 +1,15 @@
+/* Layout Wrapper */
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main Content (Expands to Push Footer to Bottom) */
+.main-content {
+  flex: 1;
+  text-align: center;
+  width: 100%;
+  padding-top: 10vh;
+  padding-bottom: 5vh;
+}

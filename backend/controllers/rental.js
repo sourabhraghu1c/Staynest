@@ -1,10 +1,20 @@
 const Rental =require("../models/rental.js");
 const Review=require("../models/review.js");
 
-module.exports.index=async (req, res) => {
-    const allRentals = await Rental.find({});
-    res.render("./rentals/index.ejs", { allRentals });
-}
+// module.exports.index=async (req, res) => {
+//     const allRentals = await Rental.find({});
+//     res.render("./rentals/index.ejs", { allRentals });
+// }
+
+module.exports.index = async(req, res) => {
+    try {
+        const allRentals = await Rental.find({});
+        res.json(allRentals); // Send JSON response for React frontend
+    } catch (error) {
+        console.error("Error fetching rentals:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
 
 module.exports.renderNewForm = (req, res) => {
     res.render("./rentals/new.ejs");
@@ -13,15 +23,26 @@ module.exports.renderNewForm = (req, res) => {
 
 
 
-module.exports.showRental=async (req, res) => {
+// module.exports.showRental=async (req, res) => {
+//     let { id } = req.params;
+//     const rental= await Rental.findById(id).populate( { path:"reviews",populate:{path:"author"} } ).populate("owner");
+//     if(!rental){
+//         req.flash("error","Rental not exist!");
+//         res.redirect("/rentals");
+//     }
+//     res.render("./rentals/show.ejs", { rental });
+// }
+
+module.exports.showRental = async (req, res) => {
     let { id } = req.params;
-    const rental= await Rental.findById(id).populate( { path:"reviews",populate:{path:"author"} } ).populate("owner");
-    if(!rental){
-        req.flash("error","Rental not exist!");
-        res.redirect("/rentals");
+    const rental = await Rental.findById(id)
+        .populate({ path: "reviews", populate: { path: "author" } })
+        .populate("owner");
+    if (!rental) {
+        return res.status(404).json({ error: "Rental not found!" });
     }
-    res.render("./rentals/show.ejs", { rental });
-}
+    res.json(rental);  // Send JSON instead of rendering EJS
+};
 
 
 

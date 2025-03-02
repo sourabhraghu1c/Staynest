@@ -1,0 +1,43 @@
+.rental-show-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    height: 100vh;
+}
+
+.rental-show-card {
+  width: 48%; /* Equivalent to col-8 */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1.5rem;
+  height: 100vh;
+  border-radius: 20px;
+  border: none;
+  background-color: #fff;
+}
+
+.show-card-img-top {
+  height: 35vh;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+h1{
+    font-weight: 150;
+    margin-bottom: 0.5rem;
+}
+
+.show-card-body p{
+    margin-bottom: 1rem;
+    font-size: medium;
+    font-weight: 100;
+}
+
+.show-card-body{
+    width: 80%;
+}
+
+
+

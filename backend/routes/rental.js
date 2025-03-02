@@ -20,9 +20,15 @@ const upload = multer({storage});
 
 
 
+// router
+// .route("/")
+// .get(wrapAsync(rentalController.index))
+// .post(isLoggedIn,upload.single("rental[photos]"),validateRental,wrapAsync(rentalController.createRental));
+
+//for react
 router
 .route("/")
-.get(wrapAsync(rentalController.index))
+.get(rentalController.index)
 .post(isLoggedIn,upload.single("rental[photos]"),validateRental,wrapAsync(rentalController.createRental));
 // 
 // this is new route
@@ -31,9 +37,15 @@ router.get("/new",isLoggedIn,rentalController.renderNewForm);
 //for search functionality
 router.get("/search", wrapAsync(rentalController.searchRentals));
 
+// router //this rout must below the /new as it take new also as a id
+// .route("/:id")
+// .get(isLoggedIn,wrapAsync(rentalController.showRental)) 
+// .put(isLoggedIn,isOwner,upload.single("rental[photos]"),validateRental, wrapAsync(rentalController.updateRental))
+// .delete(isLoggedIn,isOwner,wrapAsync(rentalController.destroyRental));
+
 router //this rout must below the /new as it take new also as a id
 .route("/:id")
-.get(isLoggedIn, wrapAsync(rentalController.showRental)) 
+.get((rentalController.showRental)) 
 .put(isLoggedIn,isOwner,upload.single("rental[photos]"),validateRental, wrapAsync(rentalController.updateRental))
 .delete(isLoggedIn,isOwner,wrapAsync(rentalController.destroyRental));
 

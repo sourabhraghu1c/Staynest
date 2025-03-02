@@ -1,0 +1,41 @@
+/* .card-container{
+    display: flex;
+    flex-direction: row;
+
+} */
+
+/* .card-container {
+    display: flex;
+    flex-wrap: wrap; 
+} */
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;  /* Allow wrapping to next row */
+    gap: 20px; /* Space between cards */
+    margin: 1rem 5rem 0rem 5rem;
+    /* justify-content: center;  */
+}
+
+/* Default: Large screens (3 cards per row) */
+.card-container > * {
+    flex: 1 1 calc(33.33% - 20px); 
+    max-width: calc(33.33% - 20px); 
+}
+
+/* Medium screens (Tablets, small laptops - 2 cards per row) */
+@media (max-width: 1024px) {
+    .card-container > * {
+        flex: 1 1 calc(50% - 20px);
+        max-width: calc(50% - 20px);
+    }
+}
+
+/* Small screens (Phones, small tablets - 1 card per row) */
+@media (max-width: 768px) {
+    .card-container > * {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
+

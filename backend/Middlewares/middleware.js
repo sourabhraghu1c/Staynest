@@ -4,14 +4,32 @@ const ExpressError=require("../utils/ExpressError.js");
 const {rentalSchema,reviewSchema}=require("../validations/schema.js")
 
 
-module.exports.isLoggedIn=(req,res,next)=>{
-    if(!req.isAuthenticated()){
-        req.session.redirectUrl=req.originalUrl;
-        req.flash("error","Please login first!");
-        return res.redirect("/login");
+// module.exports.isLoggedIn=(req,res,next)=>{
+//     if(!req.isAuthenticated()){
+//         req.session.redirectUrl=req.originalUrl;
+//         req.flash("error","Please login first!");
+//         return res.redirect("/login");
+//     }
+//     next();
+// }
+
+module.exports.isLoggedIn = (req, res, next) => {
+    
+    if (!req.isAuthenticated()) {
+        console.log("unauthenticated");
+        req.session.redirectUrl = req.originalUrl;
+
+        // Send JSON response instead of redirecting
+        return res.status(401).json({
+            success: false,
+            message: "Please login first!",
+            redirectUrl: "/login"
+        });
     }
+    console.log("authenticated");
     next();
-}
+};
+
 
 module.exports.saveRedirectUrl=(req,res,next)=>{
     if(req.session.redirectUrl){

@@ -1,7 +1,6 @@
 //const { ref } = require('joi');
 const mongoose=require("mongoose");
-const schema=mongoose.Schema;
-const User=require("./user.js");
+
 
 const rentalSchema = new mongoose.Schema({
     title: { type: String, required: true },
@@ -28,12 +27,12 @@ const rentalSchema = new mongoose.Schema({
     },
     reviews:[
         {
-            type: schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref:"Review"
         },
     ],
     owner:{
-            type: schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref:"User",
     },
 });

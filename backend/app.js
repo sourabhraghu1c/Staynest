@@ -2,6 +2,11 @@ if(process.env.NODE_ENV !="production"){
     require("dotenv").config();
 }
 
+const cors = require("cors");
+
+
+const bodyParser=require("body-parser");
+
 const express= require("express");
 const app=express();
 const mongoose=require("mongoose");
@@ -14,6 +19,16 @@ const flash=require("connect-flash");
 const passport=require("passport");
 const LocalStrategy = require('passport-local').Strategy;
 const User=require("./models/user.js");
+
+app.use(cors({
+    origin: "http://localhost:5000",  // Allow requests from React frontend
+    credentials: true,  // Necessary for cookies/sessions
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type,Authorization" // Explicitly allow headers
+}));
+
+app.use(bodyParser.json());
+app.use(express.json());
 
 //for templating
 const ejsMate=require("ejs-mate"); 
@@ -58,8 +73,12 @@ const sessionOptions={
         expires: Date.now()+7*24*60*60*1000,  //session expire in 7 days
         maxAge:7*24*60*60*1000,
         httpOnly:true,
+        sameSite: "Lax",
     },
 };
+
+
+
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -67,15 +86,29 @@ app.use(flash());
 // we use passport here to make sure that is also use sessions
 app.use(passport.initialize());
 app.use(passport.session());
+
+
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+
+
+
 
 app.use((req,res,next)=>{
     res.locals.success=req.flash("success");
     res.locals.error=req.flash("error");
     res.locals.currUser=req.user;
     next();
+});
+
+app.get("/api/current_user", (req, res) => {
+    if (req.user) {
+        res.json({ user: req.user }); // Send the logged-in user's data
+    } else {
+        res.json({ user: null }); // No user is logged in
+    }
 });
 
 app.use("/rentals",rentalRouter);
@@ -95,5 +128,3 @@ app.use((err, req, res, next) => {
     let { statusCode = 500, message = "Something went wrong!" } = err;
     res.status(statusCode).render("error.ejs", { message });
 });
-
-

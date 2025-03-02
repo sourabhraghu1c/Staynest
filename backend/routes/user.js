@@ -1,53 +1,3 @@
-// const express= require("express");
-// const router=express.Router();
-// const wrapAsync=require("../utils/wrapAsync.js");
-// const passport=require("passport");
-// const {isLoggedIn,saveRedirectUrl}=require("../middleware.js");
-// const userController=require("../controllers/user.js");
-
-// const multer = require("multer");
-// const { userProfileStorage } = require("../cloudconfig.js");
-
-
-
-
-// router
-// .route("/signup")
-// .get(userController.renderSignupForm)
-// .post(wrapAsync(userController.userSignIn));
-
-
-// router
-// .route("/login")
-// .get(userController.renderLoginForm)
-// .post(
-//     saveRedirectUrl,
-//     passport.authenticate("local",{failureRedirect:"/login",failureFlash:true}),
-//     wrapAsync(userController.userLogin)
-// );
-
-// // const uploadUserProfile = multer({userProfileStorage});
-// const uploadUserProfile = multer({ storage: userProfileStorage }); // Corrected multer storage configuration
-
-// router
-//     .route("/profile-settings")
-//     .get(isLoggedIn, userController.renderProfileSettingsForm)
-//     .post(
-//         isLoggedIn,
-//         uploadUserProfile.single("profileImage"),
-//         wrapAsync(userController.updateProfileSettings)
-//     );
-
-// //logout
-// router.get(
-//     "/logout",
-//     userController.userLogout
-// );
-
-// module.exports=router;
-
-
-
 
 const express = require("express");
 const router = express.Router();
@@ -67,14 +17,58 @@ router
   .get(userController.renderSignupForm)
   .post(wrapAsync(userController.userSignIn));
 
+// router
+//   .route("/login")
+//   .get(userController.renderLoginForm)
+//   .post(
+//     saveRedirectUrl,
+//     passport.authenticate("local", { failureRedirect: "/login", failureFlash: true }),
+//     wrapAsync(userController.userLogin)
+//   );
+
+
+
+//for react
+
 router
   .route("/login")
   .get(userController.renderLoginForm)
   .post(
-    saveRedirectUrl,
     passport.authenticate("local", { failureRedirect: "/login", failureFlash: true }),
-    wrapAsync(userController.userLogin)
+    (userController.userLogin)
   );
+
+
+
+
+
+
+
+
+
+
+
+// router
+//   .route("/login")
+//   .get(userController.renderLoginForm).post(
+//   saveRedirectUrl,
+//   (req, res, next) => {
+//     passport.authenticate("local", (err, user) => {
+//       if (err) return next(err);
+//       if (!user) {
+//         console.log("wrong username and password");
+//         return res.status(401).json({ error: "Invalid username or password" });
+//       }
+//       req.logIn(user, (err) => {
+//         if (err) return next(err);
+//         // Call userController.userLogin after successful login
+//         userController.userLogin(req, res);
+//       });
+//     })(req, res, next);
+//   }
+// );
+
+
 
 // Profile settings route
 router
