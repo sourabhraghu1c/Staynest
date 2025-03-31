@@ -1,0 +1,56 @@
+
+.menu-list {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.875rem;
+  box-sizing: border-box;
+  padding: 6px;
+  margin: 15px 0px;
+  min-width: 200px;
+  border-radius: 12px;
+  overflow: auto;
+  outline: 0;
+  background: #fff;
+  border: 1px solid #dae2ed;
+  color: #1c2025;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  z-index: 1;
+}
+
+.menu-item {
+  list-style: none;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.menu-item:last-of-type {
+  border-bottom: none;
+}
+
+.menu-item:focus {
+  outline: 3px solid #99ccf3;
+  background-color: #f3f6f9;
+  color: #1c2025;
+}
+
+.menu-item:disabled {
+  color: #9da8b7;
+}
+
+.menu-button {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  transition: all 150ms ease;
+  cursor: pointer;
+  background: #fff;
+  border: none;
+  color: #1c2025;
+}
+
+.menu-button:focus-visible {
+  box-shadow: 0 0 0 4px #99ccf3;
+  outline: none;
+}

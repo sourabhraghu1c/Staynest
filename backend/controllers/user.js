@@ -1,75 +1,6 @@
 const User = require("../models/user");
-
-
-
-module.exports.renderSignupForm = (req, res) => {
-  res.render("./users/signup.ejs");
-};
-
-// module.exports.userSignIn = async (req, res) => {
-//   try {
-//     const { username, email, password } = req.body;
-//     const newUser = new User({ username, email, password });
-//     const registeredUser = await User.register(newUser, password);
-//     req.login(registeredUser, (err) => {
-//       if (err) {
-//         return next(err);
-//       }
-//       req.flash("success", "Welcome to Staynest!");
-//       res.redirect("/rentals");
-//     });
-//   } catch (e) {
-//     req.flash("error", e.message);
-//     res.redirect("/signup");
-//   }
-// };
-
-module.exports.userSignIn = async (req, res, next) => {
-  try {
-    const { username, email, password } = req.body;
-    const newUser = new User({ username, email });
-    
-    // Register user with Passport
-    const registeredUser = await User.register(newUser, password);
-
-    req.logIn(registeredUser, (err) => {
-      if (err) {
-        return next(err);
-      }
-      return res.json({ success: true, message: "User registered successfully!", redirectUrl: "/" });
-    });
-  } catch (error) {
-    return res.status(400).json({ success: false, message: error.message });
-  }
-};
-
-
-
-module.exports.renderLoginForm = (req, res) => {
-  res.render("./users/login.ejs");
-};
-
-// module.exports.userLogin = async (req, res) => {
-//   console.log("login from Ejs");
-//   req.flash("success", "Welcome back to Staynest!");
-//   let redirectUrl = res.locals.redirectUrl || "/rentals";
-//   res.redirect(redirectUrl);
-  
-// };
-
-module.exports.userLogin = async (req, res) => {
-  try {
-    console.log("Login from React frontend");
-
-    // let redirectUrl = res.locals.redirectUrl || "/"; // Adjusted redirect URL
-    let redirectUrl ="http://localhost:5000"; // Adjusted redirect URL
-
-    res.json(redirectUrl); // Return full URL
-  } catch (error) {
-    console.error("Login error:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-};
+const bcrypt=require("bcrypt");
+const jwt=require("jsonwebtoken");
 
 
 // module.exports.userLogout = (req, res, next) => {
@@ -77,25 +8,57 @@ module.exports.userLogin = async (req, res) => {
 //     if (err) {
 //       return next(err);
 //     }
-//     req.flash("success", "You are logged out now!");
-//     res.redirect("/rentals");
+//     //res.clearCookie("connect.sid"); // Clears the session cookie (for session-based auth)
+//     console.log("logout with react");
+//     res.status(200).json({ message: "Logout successful" }); // Send JSON response
 //   });
 // };
 
-module.exports.userLogout = (req, res, next) => {
-  req.logout((err) => {
-    if (err) {
-      return next(err);
+//react with jwt signin and login
+module.exports.userSignIn = async (req, res) => {
+  try {
+    const { username, email, password } = req.body;
+    const user= await User.findOne({username});
+    if(user){
+      return res.status(409).json({message:"User is already exist, you can login",success:false});
     }
-    //res.clearCookie("connect.sid"); // Clears the session cookie (for session-based auth)
-    console.log("logout with react");
-    res.status(200).json({ message: "Logout successful" }); // Send JSON response
-  });
+
+    const newUser = new User({ username, email, password });
+    //know we encript the password
+    newUser.password = await bcrypt.hash(password,10);
+    await newUser.save();
+    res.status(201).json({message:"Signup Successful",success:true});
+    
+  } catch (error) {
+    return res.status(500).json({ success: false, message:"Internal Server error!" });
+  }
 };
 
-module.exports.renderProfileSettingsForm = (req, res) => {
-  res.render("./users/profileSettings.ejs", { user: req.user });
+module.exports.userLogin = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user= await User.findOne({username});
+    if(!user){
+      return res.status(403).json({message:"User not exist, check username",success:false});
+    }
+    const isPasswordMatch= await bcrypt.compare(password,user.password);
+    if(!isPasswordMatch){
+      return res.status(403).json({message:"wrong Password!",success:false});
+    }
+    const jwtToken=jwt.sign(
+      {username:user.username,_id:user._id,loginUser:user},
+      process.env.JWT_SECRET,
+      {expiresIn:'24h'}
+    );
+    console.log(user);
+    res.status(200).json({message:"Login Successful",success:true,jwtToken,loginUser:user});
+    
+  } catch (error) {
+    return res.status(500).json({ success: false, message:"Internal Server error!" });
+  }
 };
+
+
 
 module.exports.updateProfileSettings = async (req, res) => {
   try {
@@ -114,11 +77,9 @@ module.exports.updateProfileSettings = async (req, res) => {
       { new: true, runValidators: true }
     );
 
-    req.flash("success", "Profile updated successfully!");
-    res.redirect("/rentals");
+    res.status(200).json({ success: true, message: "Profile updated successfully!", user: updatedUser });
   } catch (error) {
-    req.flash("error", "Failed to update profile. Please try again.");
-    res.redirect("/rentals");
+    console.error("Error updating profile:", error);
+    res.status(500).json({ success: false, message: "Failed to update profile. Please try again." });
   }
 };
-

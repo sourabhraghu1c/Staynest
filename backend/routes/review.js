@@ -1,6 +1,5 @@
 const express= require("express");
-const wrapAsync=require("../utils/wrapAsync.js");
-const {reviewSchema}=require("../validations/schema.js")
+
 const {validateReview, isLoggedIn, isReviewAuther}=require("../Middlewares/middleware.js");
 //to create router
 const router=express.Router({mergeParams:true});
@@ -9,9 +8,9 @@ const router=express.Router({mergeParams:true});
 const reviewController=require("../controllers/review.js");
 
 
-// reviews route
-router.post("/",isLoggedIn,validateReview,wrapAsync(reviewController.createReview));
+router.post("/",isLoggedIn,validateReview,reviewController.createReview);
 
-router.delete("/:reviewId",isReviewAuther,isLoggedIn,wrapAsync(reviewController.destroyReview))
+
+router.delete("/:reviewId",isLoggedIn,isReviewAuther,reviewController.destroyReview);
 
 module.exports=router;
