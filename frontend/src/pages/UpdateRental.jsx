@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./AddRental.css";
 import { handleError, handleSuccess } from "../utils";
@@ -10,61 +10,36 @@ export default function UpdateRental() {
 
     const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm();
     const navigate = useNavigate();
+    const { state } = useLocation();
     const { id } = useParams(); 
-    const [rental, setRental] = useState(null);
     const port = import.meta.env.VITE_BACKEND_PORT;
 
 useEffect(() => {
-    const fetchRental = async () => {
-        try {
-            const token = localStorage.getItem("token");
-            if (!token) {
-                handleError("Please login first!");
-                return;
-            }
+    if (state?.rental) {
+        const data = state.rental;
+        reset({
+            title: data.title || "",
+            description: data.description || "",
+            location: {
+                address: data.location?.address || "",
+                state: data.location?.state || "",
+                pincode: data.location?.pincode || "",
+            },
+            price: data.price || "",
+            propertyType: data.propertyType || "",
+            facilities: data.facilities || "",
+            contact: {
+                name: data.contact?.name || "",
+                phone: data.contact?.phone || "",
+                email: data.contact?.email || "",
+            },
+        });
+    } else {
+        handleError("Access denied. Please open rental from details page.");
+        navigate(`/rentals/${id}`);
+    }
+}, [state, reset, navigate,id]);
 
-            const response = await fetch(`http://localhost:${port}/rentals/${id}/edit`, {
-                method: "GET",
-                headers: {
-                    "Authorization": token,
-                    "Content-Type": "application/json",
-                },
-            });
-
-            if (!response.ok) {
-                handleError("Failed to fetch rental");
-                return;
-            }
-
-            const data = await response.json();
-            setRental(data);
-
-            // Flatten the data to match form fields
-            reset({
-                title: data.title || "",
-                description: data.description || "",
-                location:{
-                    address: data.location?.address || "", 
-                    state: data.location?.state || "",
-                    pincode: data.location?.pincode || "",
-                },
-                price: data.price || "",
-                propertyType: data.propertyType || "",
-                facilities: data.facilities || "",
-                contact:{
-                    name: data.contact?.name || "",
-                    phone: data.contact?.phone || "",
-                    email: data.contact?.email || "",
-                },
-            });
-
-        } catch (err) {
-            console.error("Error fetching rental:", err);
-        }
-    };
-
-    fetchRental();
-}, [id, reset]); 
 
 
 
@@ -75,6 +50,7 @@ useEffect(() => {
 
         // Append text data as JSON fields
         formData.append("title", data.title);
+        formData.append("facilities", data.facilities);
         formData.append("description", data.description);
         formData.append("price", data.price);
         formData.append("propertyType", data.propertyType);
@@ -101,18 +77,15 @@ useEffect(() => {
         }
 
         handleSuccess("Rental updated successfully!");
-        navigate("/");
+        navigate(`/rentals/${id}`);
     } catch (error) {
-        handleError(error.message || "Something went wrong");
+        handleError(error.response.data.message || "Something went wrong");
     }
 };
 
-
-
-
     return (
         <div className="add-rental-container">
-            <h3>Add New Rental</h3>
+            <h3>Update Rental</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <label className="form-label">Title:</label>
@@ -124,6 +97,12 @@ useEffect(() => {
                     <label className="form-label">Description:</label>
                     <textarea {...register("description", { required: "Please provide a description" })} className="form-control" placeholder="Provide a description" />
                     {errors.description && <span className="error-text">{errors.description.message}</span>}
+                </div>
+
+                <div>
+                    <label className="form-label">Facilities:</label>
+                    <input type="text" {...register("facilities")} className="form-control" placeholder="Enter the facilities" />
+                    {errors.facilities && <span className="error-text">{errors.facilities.message}</span>}
                 </div>
 
                 {/* Location Fields */}

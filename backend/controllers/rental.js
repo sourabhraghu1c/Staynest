@@ -2,7 +2,7 @@ const Rental =require("../models/rental.js");
 const Review=require("../models/review.js");
 const multer = require("multer");
 const {storage}=require("../config/cloudconfig.js");
-const upload = multer({ storage });
+// const upload = multer({ storage });
 
 
 
@@ -16,12 +16,11 @@ module.exports.index = async(req, res) => {
     }
 };
 
-
 module.exports.showRental = async (req, res) => {
     let { id } = req.params;
     const rental = await Rental.findById(id)
         .populate({ path: "reviews", populate: { path: "author" } })
-        .populate("owner");
+        .populate("postedBy");
     if (!rental) {
         return res.status(404).json({ error: "Rental not found!" });
     }
@@ -29,20 +28,18 @@ module.exports.showRental = async (req, res) => {
 };
 
 
-module.exports.createRental = async (req, res, next) => {
+module.exports.createRental = async (req, res) => {
     try {
         let newRental=new Rental({...req.body});
-        // Handle uploaded image
-        newRental.owner=req.user._id;
+        newRental.postedBy=req.user._id;
         if (req.file) {
             newRental.photos = {
                 url: req.file.path, 
                 filename: req.file.originalname,
             };
         }
-        console.log(newRental);
+        console.log("newly adder rental is :",newRental);
         await newRental.save();
-        console.log("rental is saved");
         return res.status(201).json({ message: "New rental created!", success:true });
     } catch (error) {
         
@@ -51,15 +48,6 @@ module.exports.createRental = async (req, res, next) => {
 };
 
 
-module.exports.editRental=async (req, res) => {
-    let { id } = req.params;
-    const rental = await Rental.findById(id);
-    if(!rental){
-        res.status(400).json({message:"Error in  updation!",success:false});
-    }
-    return res.json(rental);
-}
-
 module.exports.updateRental = async (req, res) => {
     try {
         let { id } = req.params;
@@ -67,11 +55,7 @@ module.exports.updateRental = async (req, res) => {
         if (!rental) {
             return res.status(400).json({ message: "Rental not found!", success: false });
         }
-
-        // Extract the update data while preserving photos
         let updateData = { ...req.body };
-
-        // If no new photo is uploaded, preserve the existing photo
         if (!req.file) {
             updateData.photos = rental.photos;
         } else {
@@ -80,12 +64,8 @@ module.exports.updateRental = async (req, res) => {
                 filename: req.file.filename
             };
         }
-
-        // Update the rental
         await Rental.findByIdAndUpdate(id, updateData, { new: true });
-
         return res.status(200).json({ message: "Rental updated successfully!", success: true });
-
     } catch (err) {
         console.error("Update error:", err);
         return res.status(500).json({ message: "Error updating rental!", success: false });
@@ -99,13 +79,8 @@ module.exports.destroyRental = async (req, res) => {
         if (!rental) {
             return res.status(404).json({ error: "Rental not found" });
         }
-
-        // Delete associated reviews
         await Review.deleteMany({ _id: { $in: rental.reviews } });
-
-        // Delete the rental
         await Rental.findByIdAndDelete(req.params.id);
-
         res.status(200).json({ message: "Successfully deleted rental" });
     } catch (error) {
         console.error("Error deleting rental:", error);
@@ -142,7 +117,6 @@ module.exports.searchRentals = async (req, res) => {
 
         const allRentals = await Rental.find(query);
 
-        // Send JSON response instead of rendering EJS
         res.json({ rentals: allRentals });
     } catch (error) {
         console.error("Error fetching rentals:", error);

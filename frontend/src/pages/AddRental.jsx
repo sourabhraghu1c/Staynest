@@ -1,4 +1,3 @@
-
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -25,6 +24,7 @@ export default function AddRental() {
 
         // Append text data as JSON fields
         formData.append("title", data.title);
+        formData.append("facilities", data.facilities);
         formData.append("description", data.description);
         formData.append("price", data.price);
         formData.append("propertyType", data.propertyType);
@@ -75,6 +75,12 @@ export default function AddRental() {
                     <label className="form-label">Description:</label>
                     <textarea {...register("description", { required: "Please provide a description" })} className="form-control" placeholder="Provide a description" />
                     {errors.description && <span className="error-text">{errors.description.message}</span>}
+                </div>
+
+                <div>
+                    <label className="form-label">Facilities:</label>
+                    <input type="text" {...register("facilities")} className="form-control" placeholder="Enter the facilities" />
+                    {errors.facilities && <span className="error-text">{errors.facilities.message}</span>}
                 </div>
 
                 {/* Location Fields */}

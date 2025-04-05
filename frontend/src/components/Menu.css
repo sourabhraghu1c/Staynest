@@ -1,31 +1,58 @@
+.menu-container {
+  position: relative;
+  display: inline-block;
+}
 
+/* Button (Avatar) */
+.menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1vw;
+}
+
+/* Avatar */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Dropdown Menu */
 .menu-list {
+  position: absolute;
+  top: 45px;
+  right: 0;
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: 0.875rem;
   box-sizing: border-box;
   padding: 6px;
-  margin: 15px 0px;
+  margin: 0;
   min-width: 200px;
   border-radius: 12px;
-  overflow: auto;
+  overflow: hidden;
   outline: 0;
+  height: 170px;
   background: #fff;
   border: 1px solid #dae2ed;
   color: #1c2025;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  z-index: 1;
+  z-index: 100;
 }
 
+/* Menu Items */
 .menu-item {
   list-style: none;
-  padding: 8px;
+  padding: 10px;
   border-radius: 8px;
   cursor: pointer;
   user-select: none;
-}
-
-.menu-item:last-of-type {
-  border-bottom: none;
+  transition: background 0.2s ease-in-out;
 }
 
 .menu-item:focus {
@@ -34,23 +61,7 @@
   color: #1c2025;
 }
 
-.menu-item:disabled {
-  color: #9da8b7;
+.menu-item:hover {
+  border: 2px solid #99ccf3;
 }
 
-.menu-button {
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-weight: 600;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  transition: all 150ms ease;
-  cursor: pointer;
-  background: #fff;
-  border: none;
-  color: #1c2025;
-}
-
-.menu-button:focus-visible {
-  box-shadow: 0 0 0 4px #99ccf3;
-  outline: none;
-}

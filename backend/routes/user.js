@@ -8,7 +8,7 @@ const multer = require("multer");
 const { userProfileStorage } = require("../config/cloudconfig.js");
 
 // Multer storage configuration for handling profile image uploads
-const uploadUserProfile = multer({ storage: userProfileStorage }); // Corrected multer storage configuration
+const uploadUserProfile = multer({ storage: userProfileStorage }); 
 
 router
   .route("/signup")
@@ -23,11 +23,8 @@ router
   .route("/profile-settings")
   .post(
     isLoggedIn,
-    uploadUserProfile.single("profileImage"), // Handles profile image upload
-  userController.updateProfileSettings // Calls the controller to update the profile
+    uploadUserProfile.single("profileImage"),
+    userController.updateProfileSettings 
   );
-
-// Logout route
-// router.get("/logout", userController.userLogout);
 
 module.exports = router;

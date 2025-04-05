@@ -17,17 +17,12 @@ router
   .route("/")
   .get(rentalController.index)
   .post(
-    isLoggedIn,             // ✅ Auth first
-    upload.single("photos"), // ✅ Process file before validation
-    validateRental,         // ✅ Validate after file processing
+    isLoggedIn,             
+    upload.single("photos"), 
+    validateRental,         
     rentalController.createRental
   );
 
-
-
-
-
-//for search functionality
 router.get("/search",rentalController.searchRentals);
 
 router //this rout must below the /new as it take new also as a id
@@ -35,11 +30,6 @@ router //this rout must below the /new as it take new also as a id
 .get(isLoggedIn,rentalController.showRental) 
 .put(isLoggedIn,isOwner,upload.single("photos"),validateRental,rentalController.updateRental)
 .delete(isLoggedIn,isOwner,rentalController.destroyRental);
-
-
-// this is edit route
-router.get("/:id/edit",isLoggedIn,isOwner,rentalController.editRental);
-
 
 
 module.exports=router;

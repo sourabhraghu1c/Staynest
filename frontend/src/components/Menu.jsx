@@ -1,56 +1,75 @@
-
-import * as React from 'react';
-import { Dropdown } from '@mui/base/Dropdown';
-import { Menu } from '@mui/base/Menu';
-import { MenuItem as BaseMenuItem } from '@mui/base/MenuItem';
-import { MenuButton as BaseMenuButton } from '@mui/base/MenuButton';
-import Avatar from '@mui/material/Avatar';
-import './Menu.css'; // Import the external CSS file
-import { handleSuccess } from "../utils";
+import React, { useState, useRef, useEffect } from "react";
+import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { handleSuccess } from "../utils";
+import "./Menu.css";
 
-export default function MenuSimple({loggedInUser }) {
-  const createHandleMenuClick = (menuItem) => {
-    return () => {
-      console.log(`Clicked on ${menuItem}`);
+const Menu = () => {
+    const { loggedInUser, logout } = useAuth();
+    const navigate = useNavigate();
+    const [menuOpen, setMenuOpen] = useState(false);
+    const menuRef = useRef(null);
+
+    // Toggle menu visibility
+    const toggleMenu = () => {
+        setMenuOpen((prev) => !prev);
     };
-  };
-  
-  const navigate = useNavigate();
-  const handleLogout = async () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('redirectAfterLogin');
-    localStorage.removeItem('loginUser');
-    handleSuccess("Log-Out Successful!");
-    setTimeout(() => {
-      navigate("/");
-    }, 1000);
-  };
 
-  const handleProfileSettings=async()=>{
-  
+    // Close menu when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setMenuOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
 
-  };
+    // Close menu and navigate
+    const handleMenuClick = (callback) => {
+        setMenuOpen(false); // Close menu
+        callback(); // Execute function
+    };
 
-  return (
-    <Dropdown  >
-      <BaseMenuButton className="menu-button">
-        <Avatar alt="User Avatar" src={loggedInUser.profileImage} />
-      </BaseMenuButton>
-      <Menu slots={{ listbox: 'ul' }} className="menu-list">
-        <BaseMenuItem className="menu-item" onClick={createHandleMenuClick('Profile')}>
-          Profile settings
-        </BaseMenuItem>
-        <BaseMenuItem className="menu-item" onClick={handleProfileSettings}>
-          My Rentals
-        </BaseMenuItem>
-        <BaseMenuItem className="menu-item" onClick={handleProfileSettings}>
-          About Us
-        </BaseMenuItem>
-        <BaseMenuItem className="menu-item" onClick={handleLogout}>
-          Log out
-        </BaseMenuItem>
-      </Menu>
-    </Dropdown>
-  );
-}
+    const handleLogout = () => {
+        handleMenuClick(() => {
+            logout();
+            handleSuccess("Log-Out Successful!");
+            navigate("/");
+        });
+    };
+
+    const handleProfileSettings = () => {
+        handleMenuClick(() => navigate("/profile-settings"));
+    };
+
+    return (
+        <div className="menu-container" ref={menuRef}>
+            {/* Avatar Button */}
+            <button className="menu-button" onClick={toggleMenu}>
+                <img 
+                    src={loggedInUser?.profileImage || "/default-avatar.png"} 
+                    alt="User Avatar" 
+                    className="avatar"
+                />
+            </button>
+
+            {/* Dropdown Menu */}
+            {menuOpen && (
+                <ul className="menu-list">
+                    <li className="menu-item" onClick={handleProfileSettings}>
+                        Profile Settings
+                    </li>
+                    <li className="menu-item" onClick={() => setMenuOpen(false)}>My Rentals</li>
+                    <li className="menu-item" onClick={() => setMenuOpen(false)}>About Us!</li>
+                    <li className="menu-item" onClick={handleLogout}>
+                        Log Out
+                    </li>
+                </ul>
+            )}
+        </div>
+    );
+};
+
+export default Menu;

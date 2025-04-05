@@ -18,7 +18,8 @@ const rentalData = [
         name: "Sourabh",
         phone: "1234567891",
         email: ""
-      }
+      },
+      addedByHomeseeker:false,
     },
     {
       title: "Budget-Friendly Hostel for Boys",
@@ -39,7 +40,8 @@ const rentalData = [
         name: "Sourabh",
         phone: "1234567891",
         email: ""
-      }
+      },
+      addedByHomeseeker:false,
     },
     {
       title: "Girls PG with Gym Facilities",
@@ -60,7 +62,8 @@ const rentalData = [
         name: "Sourabh",
         phone: "1234567891",
         email: ""
-      }
+      },
+      addedByHomeseeker:false,
     },
     {
       title: "Affordable PG Near Shopping District",
@@ -81,7 +84,8 @@ const rentalData = [
         name: "Sourabh",
         phone: "1234567891",
         email: ""
-      }
+      },
+      addedByHomeseeker:false,
     },
     {
       title: "Modern Hostel for Boys Near University",
@@ -102,7 +106,8 @@ const rentalData = [
         name: "Sourabh",
         phone: "1234567891",
         email: ""
-      }
+      },
+      addedByHomeseeker:false,
     },
     {
       title: "Luxury PG with AC and Wi-Fi",
@@ -123,7 +128,8 @@ const rentalData = [
         name: "Sourabh",
         phone: "1234567891",
         email: ""
-      }
+      },
+      addedByHomeseeker:false,
     },
     {
       title: "Economical Hostel Near Railway Station",
@@ -144,7 +150,8 @@ const rentalData = [
         name: "Sourabh",
         phone: "1234567891",
         email: ""
-      }
+      },
+      addedByHomeseeker:false,
     },
     {
       title: "Girls PG with 24/7 Security",
@@ -165,7 +172,8 @@ const rentalData = [
         name: "Sourabh",
         phone: "1234567891",
         email: ""
-      }
+      },
+      addedByHomeseeker:false,
     },
     {
       title: "PG Near IT Park with Easy Commute",
@@ -186,7 +194,8 @@ const rentalData = [
         name: "Sourabh",
         phone: "1234567891",
         email: ""
-      }
+      },
+      addedByHomeseeker:false,
     },
     {
       title: "Cozy Hostel for Boys Near Market",
@@ -207,7 +216,8 @@ const rentalData = [
         name: "Sourabh",
         phone: "1234567891",
         email: ""
-      }
+      },
+      addedByHomeseeker:false,
     },
     {
       title: "Luxury PG with Swimming Pool Access",
@@ -228,7 +238,8 @@ const rentalData = [
         name: "Sourabh",
         phone: "1234567891",
         email: ""
-      }
+      },
+      addedByHomeseeker:false,
     },
     {
       title: "Girls PG Near Shopping Mall",
@@ -249,7 +260,8 @@ const rentalData = [
         name: "Sourabh",
         phone: "1234567891",
         email: ""
-      }
+      },
+      addedByHomeseeker:false,
     },
     {
       title: "Affordable Hostel Near College",
@@ -270,7 +282,8 @@ const rentalData = [
         name: "Sourabh",
         phone: "1234567891",
         email: ""
-      }
+      },
+      addedByHomeseeker:false,
     },
     {
       title: "Luxury PG with Housekeeping Services",
@@ -291,7 +304,8 @@ const rentalData = [
         name: "Sourabh",
         phone: "1234567891",
         email: ""
-      }
+      },
+      addedByHomeseeker:false,
     },
     {
       title: "Hostel with Gym Access for Students",
@@ -312,7 +326,8 @@ const rentalData = [
         name: "Sourabh",
         phone: "1234567891",
         email: ""
-      }
+      },
+      addedByHomeseeker:false,
     }
   ];
 

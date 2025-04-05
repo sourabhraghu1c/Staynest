@@ -1,12 +1,9 @@
-
-// import './map.css';
 import { useEffect, useRef } from "react";
 
 const Map = ({ address, apiKey }) => {
   const mapRef = useRef(null);
 
   useEffect(() => {
-    // Ensure the HERE Maps library is available before proceeding
     if (!window.H || !apiKey) {
       console.error("HERE Maps API key is required or script not loaded yet.");
       return;
@@ -30,24 +27,6 @@ const Map = ({ address, apiKey }) => {
 
     // Add UI controls
     const ui = window.H.ui.UI.createDefault(map, defaultLayers);
-
-    // Function to add locations to the map
-    // const addLocationsToMap = (locations) => {
-    //   const group = new window.H.map.Group();
-    //   locations.forEach((location) => {
-    //     const marker = new window.H.map.Marker(location.position);
-    //     marker.label = location.address.label;
-    //     group.addObject(marker);
-    //   });
-
-    //   group.addEventListener("tap", (evt) => {
-    //     map.setCenter(evt.target.getGeometry());
-    //     openBubble(evt.target.getGeometry(), evt.target.label);
-    //   });
-
-    //   map.addObject(group);
-    //   map.setCenter(group.getBoundingBox().getCenter());
-    // };
 
     const addLocationsToMap = (locations) => {
   const group = new window.H.map.Group();
@@ -121,29 +100,3 @@ locations.forEach((location) => {
 
 export default Map;
 
-
-// const Map = (locations) => {
-//   const group = new window.H.map.Group();
-
-//   locations.forEach((location) => {
-//     // Define a custom SVG marker with a different color
-//     const customIcon = new window.H.map.Icon(
-//       `<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-//         <circle cx="12" cy="12" r="10" fill="red" stroke="black" stroke-width="2"/>
-//       </svg>`,
-//       { anchor: { x: 12, y: 12 } } // Center the marker
-//     );
-
-//     const marker = new window.H.map.Marker(location.position, { icon: customIcon });
-//     marker.label = location.address.label;
-//     group.addObject(marker);
-//   });
-
-//   group.addEventListener("tap", (evt) => {
-//     map.setCenter(evt.target.getGeometry());
-//     openBubble(evt.target.getGeometry(), evt.target.label);
-//   });
-
-//   map.addObject(group);
-//   map.setCenter(group.getBoundingBox().getCenter());
-// };

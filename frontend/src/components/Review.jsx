@@ -14,54 +14,6 @@ export default function Review({ setRental }) {
   const token = localStorage.getItem("token");
   const loggedInUser = JSON.parse(localStorage.getItem('loginUser'));
   const userId = loggedInUser._id;
-  // const userId = localStorage.getItem("_id");
-  const navigate = useNavigate();
-
-//   const handleSubmit = async (event) => {
-//   event.preventDefault();
-
-//   const reviewData = {
-//     review: {
-//       rating,
-//       comment,
-//     },
-//   };
-
-//   try {
-//     const response = await fetch(`http://localhost:${port}/rentals/${id}/reviews`, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: token,
-//       },
-//       body: JSON.stringify(reviewData),
-//     });
-
-//     if (!response.ok) {
-//       throw new Error("Failed to submit review");
-//     }
-
-//     const newReview = await response.json();
-//     console.log("Review submitted:", newReview);
-//     setRating(1);
-//     setComment("");
-
-// // Update state: add the new review
-// setRental((prevRental) => {
-//   if (!prevRental || !prevRental.reviews) {
-//     return { ...prevRental, reviews: [newReview.review] }; // Initialize reviews array
-//   }
-//   return {
-//     ...prevRental,
-//     reviews: [...prevRental.reviews, newReview.review],
-//   };
-// });
-
-//   } catch (err) {
-//     setError(err.message);
-//     console.error("Error submitting review:", err);
-//   }
-// };
 
 const handleSubmit = async (event) => {
   event.preventDefault();
@@ -92,7 +44,6 @@ const handleSubmit = async (event) => {
     setRating(1);
     setComment("");
 
-    // Ensure the new review has the correct author ID
     setRental((prevRental) => {
       if (!prevRental || !prevRental.reviews) {
         return {
@@ -146,48 +97,3 @@ const handleSubmit = async (event) => {
     </Box>
   );
 }
-
-
-
-
-
-
-
-
-
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-
-  //   const reviewData = {
-  //     review: {
-  //       rating,
-  //       comment
-  //     }
-  //   };
-
-  //   try {
-  //     const response = await fetch(`http://localhost:${port}/rentals/${id}/reviews`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "Authorization": token
-  //       },
-  //       body: JSON.stringify(reviewData),
-  //       credentials: "include" // Ensure cookies (session) are sent for authentication
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error("Failed to submit review");
-  //     }
-
-  //     const result = await response.json();
-  //     console.log("Review submitted:", result);
-  //     setRating(1);
-  //     setComment("");
-  //     navigate(`/rentals/${id}`);
-
-  //   } catch (err) {
-  //     setError(err.message);
-  //     console.error("Error submitting review:", err);
-  //   }
-  // };

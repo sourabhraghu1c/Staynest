@@ -1,4 +1,3 @@
-//const { ref } = require('joi');
 const mongoose=require("mongoose");
 
 
@@ -25,13 +24,37 @@ const rentalSchema = new mongoose.Schema({
         },
         email: { type: String }
     },
+    
+    ownerDetails: {
+        name: {
+            type: String,
+            required: function () {
+                return this.addedByHomeseeker === true;
+            },
+        },
+        phone: {
+            type: String,
+            required: function () {
+                return this.addedByHomeseeker === true;
+            },
+        },
+        email: {
+            type: String,
+        },
+    },
+
+    addedByHomeseeker: {
+        type: Boolean,
+        default: false,
+    },
+
     reviews:[
         {
             type: mongoose.Schema.Types.ObjectId,
             ref:"Review"
         },
     ],
-    owner:{
+    postedBy:{
             type: mongoose.Schema.Types.ObjectId,
             ref:"User",
     },

@@ -2,29 +2,14 @@ const User = require("../models/user");
 const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
 
-
-// module.exports.userLogout = (req, res, next) => {
-//   req.logout((err) => {
-//     if (err) {
-//       return next(err);
-//     }
-//     //res.clearCookie("connect.sid"); // Clears the session cookie (for session-based auth)
-//     console.log("logout with react");
-//     res.status(200).json({ message: "Logout successful" }); // Send JSON response
-//   });
-// };
-
-//react with jwt signin and login
 module.exports.userSignIn = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password,role,phonenumber } = req.body;
     const user= await User.findOne({username});
     if(user){
       return res.status(409).json({message:"User is already exist, you can login",success:false});
     }
-
-    const newUser = new User({ username, email, password });
-    //know we encript the password
+    const newUser = new User({ username, email, password, role, phonenumber });
     newUser.password = await bcrypt.hash(password,10);
     await newUser.save();
     res.status(201).json({message:"Signup Successful",success:true});
@@ -50,7 +35,6 @@ module.exports.userLogin = async (req, res) => {
       process.env.JWT_SECRET,
       {expiresIn:'24h'}
     );
-    console.log(user);
     res.status(200).json({message:"Login Successful",success:true,jwtToken,loginUser:user});
     
   } catch (error) {
@@ -59,25 +43,56 @@ module.exports.userLogin = async (req, res) => {
 };
 
 
-
 module.exports.updateProfileSettings = async (req, res) => {
   try {
-    const { fullname, phonenumber, dob } = req.body;
-    let profileImage = req.user.profileImage; // Default to current image
+    const {phonenumber,email, currentPassword, newPassword } = req.body;
 
-    // Check if a new file is uploaded
-    if (req.file) {
-      profileImage = req.file.path; // Use the uploaded image's file path
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
     }
 
-    // Update user in the database with new profile data
-    const updatedUser = await User.findByIdAndUpdate(
-      req.user._id,
-      { fullname, phonenumber, dob, profileImage },
-      { new: true, runValidators: true }
+    let profileImage = user.profileImage; 
+    console.log("old image=",profileImage);
+
+    if (req.file) {
+      profileImage = req.file.path;
+      console.log("new image=",profileImage||"no new image");
+    }
+
+    const isProfileModified = (
+      phonenumber !== user.phonenumber ||
+      email !== user.email ||
+      profileImage !== user.profileImage
     );
 
-    res.status(200).json({ success: true, message: "Profile updated successfully!", user: updatedUser });
+    if (isProfileModified || newPassword) {
+      if (!currentPassword) {
+        return res.status(400).json({ success: false, message: "Current password is required to update profile." });
+      }
+
+      const isMatch = await bcrypt.compare(currentPassword, user.password);
+      if (!isMatch) {
+        return res.status(400).json({ success: false, message: "Current password is incorrect" });
+      }
+
+      if (newPassword) {
+        if(newPassword==currentPassword){
+          return res.status(400).json({ success: false, message: "New password must be different from current password!" });
+        }
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(newPassword, salt);
+        user.password = hashedPassword;
+      }
+    }
+
+    user.phonenumber = phonenumber || user.phonenumber;
+    user.email = email || user.email;
+    user.profileImage = profileImage;
+
+    await user.save();
+
+    res.status(200).json({ success: true, message: "Profile updated successfully!", user });
   } catch (error) {
     console.error("Error updating profile:", error);
     res.status(500).json({ success: false, message: "Failed to update profile. Please try again." });

@@ -47,16 +47,8 @@ app.use("/rentals",rentalRouter);
 app.use("/rentals/:id/reviews",reviewRouter);
 app.use("/",userRouter);
 
-
-
-
-//Catch-all for undefined routes
 app.all("*", (req, res, next) => {
     res.status(404).json({message:"page not found",success:false});
 });
 
-// Global error handler
-// app.use((err, req, res, next) => {
-//     let { statusCode = 500, message = "Something went wrong!" } = err;
-//     res.status(statusCode).render("error.ejs", { message });
-// });
+

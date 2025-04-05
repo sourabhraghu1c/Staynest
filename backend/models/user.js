@@ -9,7 +9,6 @@ const userSchema= new Schema({
     },
     email :{
         type:String,
-        required:true,
     },
     password :{
         type:String,
@@ -19,9 +18,16 @@ const userSchema= new Schema({
         type: String,
         default: "https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"
     },
-    phonenumber: { type: String }, // Optional
-    fullname: { type: String }, // Optional
-    dob: { type: Date }, // Optional
+    phonenumber: { 
+        type: String,
+        required:true, 
+    },
+    role: {
+        type: String,
+        required:true,
+        enum: ["PropertyOwner", "Homeseeker", "admin"],
+        default: "Homeseeker"
+    }
 });
 
 module.exports =mongoose.model('User',userSchema);;

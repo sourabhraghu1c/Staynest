@@ -9,7 +9,7 @@ module.exports.createReview = async (req, res) => {
         }
 
         const newReview = new Review(req.body.review);
-        newReview.author = req.user._id; // Ensure user authentication is handled
+        newReview.author = req.user._id; 
 
         rental.reviews.push(newReview);
         await newReview.save();
@@ -21,8 +21,6 @@ module.exports.createReview = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
-
-
 
 
 module.exports.destroyReview=async(req,res)=>{

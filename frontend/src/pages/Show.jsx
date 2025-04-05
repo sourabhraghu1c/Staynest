@@ -12,13 +12,14 @@ import Review from "../components/Review";
 const Show = () => {
   const { id } = useParams(); // Get rental ID from URL
   const [rental, setRental] = useState(null);
-  const [isOwner, setIsOwner] = useState(false); // State to check ownership
+  const [islistedByUser, setIslistedByUser] = useState(false); // State to check ownership
   const mapApiKey = import.meta.env.VITE_MAP_API_KEY;
   const port = import.meta.env.VITE_BACKEND_PORT;
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const loggedInUser = JSON.parse(localStorage.getItem('loginUser'));
   const userId = loggedInUser._id;
+  const UserRole=loggedInUser.role;
 
   useEffect(() => {
     const fetchRental = async () => {
@@ -45,8 +46,8 @@ const Show = () => {
         setRental(data);
 
         // Check if the logged-in user is the owner of the rental
-        if (data.owner._id === userId) {
-          setIsOwner(true);
+        if (data.postedBy._id === userId ||UserRole==="admin") {
+          setIslistedByUser(true);
         }
       } catch (err) {
         console.error("Error fetching rental:", err);
@@ -138,7 +139,7 @@ const Show = () => {
           />
           <div className="show-card-body">
             <p>
-              Owned by: <i>{rental.owner.username}</i>
+              Owned by: <i>{rental.postedBy.username}</i>
             </p>
             <p>{rental.description}</p>
             <p>₹{rental.price.toLocaleString("en-IN")} per month</p>
@@ -151,17 +152,13 @@ const Show = () => {
           </div>
 
           {/* Show Edit & Delete buttons only if user is the owner */}
-          {isOwner && (
+          {islistedByUser && (
             <>
               <Stack direction="row" spacing={13.38}>
-                <Button variant="contained" style={{backgroundColor:"maroon"}}>
-                  <a
-                    style={{ textDecoration: "none", color: "white" }}
-                    href={`/rentals/${rental._id}/edit`}
-                  >
+                <Button variant="contained" style={{ backgroundColor: "maroon" }} onClick={() => navigate(`/rentals/${rental._id}/edit`, { state: { rental } })}>
                   Edit
-                  </a>
                 </Button>
+
                 <Button style={{color:"white",backgroundColor:"red",border:"none"}} variant="outlined" startIcon={<DeleteIcon  />} onClick={handleDelete}>
                   Delete
                 </Button>
@@ -171,38 +168,38 @@ const Show = () => {
         </div>
       </div>
 
-      {/* Review */}
-      
-        <div className="rental-show-card" style={{height:"40vh"}}>
+      {/* Add Review */}
+      {(UserRole === "admin" || UserRole === "Homeseeker") && (
+        <div className="rental-show-card" style={{ height: "40vh" }}>
           <Review setRental={setRental} />
         </div>
-        
-          <hr />
-          {rental.reviews && rental.reviews.length > 0 ? (
-            rental.reviews.map((review, index) => (
-            
+      )}
+
+      {/* show Reviews */}
+      <hr />
+        {rental.reviews && rental.reviews.length > 0 ? (
+          rental.reviews.map((review, index) => (
             <div key={index} className="rental-show-card" style={{height:"40vh"}}>
               <hr />
-            <p>Rating: {review.rating}⭐</p>
-            <p>{review.comment}</p>
-            {userId === review.author._id && (
-                  <Button
-                    variant="contained"
-                    color="error"
-                    size="small"
-                    startIcon={<DeleteIcon />}
-                    onClick={() => handleDeleteReview(review._id)}
-                  >
-                    Delete
-                  </Button>
-                )}
-            <hr />
+              <p>Rating: {review.rating}⭐</p>
+              <p>{review.comment}</p>
+              {(userId === review.author._id || UserRole==="admin") && (
+                <Button
+                  variant="contained"
+                  color="error"
+                  size="small"
+                  startIcon={<DeleteIcon />}
+                  onClick={() => handleDeleteReview(review._id)}
+                >
+                  Delete
+                </Button>
+              )}
+              <hr />
             </div>
-
-            ))
-            ) : (
-          <p>No reviews available</p>
-          )}
+          ))
+        ) : (
+        <p>No reviews available</p>
+        )}
 
       <div className="rental-show-card-container" >
         <div className="rental-show-card" >
@@ -221,38 +218,3 @@ const Show = () => {
 };
 
 export default Show;
-
-
-
-
-
-
-  // const handleDeleteReview=async(review_id)=>{
-  //   try {
-  //     if (!token) {
-  //       handleError("Please login first!");
-  //       return;
-  //     }
-
-  //     const response = await fetch(`http://localhost:${port}/rentals/${id}/reviews/${review_id}`, {
-  //       method: "DELETE",
-  //       headers: {
-  //         Authorization: token,
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error("Failed to delete review");
-  //     }
-
-  //     handleSuccess("Review deleted successfully!");
-  //     setTimeout(() => {
-  //       navigate(`/rentals/${rental._id}`);
-  //     }, 1000);
-      
-  //   } catch (err) {
-  //     console.error("Error deleting review:", err);
-  //     handleError("Error deleting review. Please try again.");
-  //   }
-  // }

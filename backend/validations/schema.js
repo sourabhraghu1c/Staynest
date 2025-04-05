@@ -2,8 +2,10 @@ const Joi = require('joi');
 
 module.exports.userSignupSchema=Joi.object({
     username: Joi.string().min(4).max(100).required(),
-    email: Joi.string().email().required(),
+    phonenumber: Joi.string().pattern(/^\d{10}$/).required(),
     password: Joi.string().min(4).max(100).required(),
+    email: Joi.string().email().allow("").optional(),
+    role: Joi.string().valid("PropertyOwner", "Homeseeker", "admin").required()
 });
 
 module.exports.userLoginSchema=Joi.object({
@@ -29,12 +31,31 @@ module.exports.rentalSchema = Joi.object({
     }).required(),
     price: Joi.number().required().min(0),
     propertyType: Joi.string().required(),
-    facilities: Joi.string().allow("").optional(),
-    photos: Joi.any().optional(), // ✅ Accept file upload without strict validation
+    facilities: Joi.string().allow('').optional(),
+
+    photos: Joi.any().optional(),
+
     contact: Joi.object({
         name: Joi.string().required(),
         phone: Joi.string().pattern(/^\d{10}$/).required(),
-        email: Joi.string().email().allow("").optional(),
+        email: Joi.string().email().allow('').optional(),
     }).required(),
+
+    ownerDetails: Joi.object({
+        name: Joi.string().when('...addedByHomeseeker', {
+            is: true,
+            then: Joi.required(),
+            otherwise: Joi.optional()
+        }),
+        phone: Joi.string().pattern(/^\d{10}$/).when('...addedByHomeseeker', {
+            is: true,
+            then: Joi.required(),
+            otherwise: Joi.optional()
+        }),
+        email: Joi.string().email().allow('').optional(),
+    }).optional(),
+
+    addedByHomeseeker: Joi.boolean().default(false),
 }).required();
+
 

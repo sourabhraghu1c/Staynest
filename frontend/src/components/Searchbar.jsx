@@ -18,32 +18,6 @@ const SearchBar = () => {
     setShowFilters(!showFilters);
   };
 
-//   const handleSearch = async (e) => {
-//   e.preventDefault();
-
-//   const queryParams = new URLSearchParams();
-//   if (address) queryParams.append("address", address);
-//   if (priceRange) queryParams.append("price_range", priceRange);
-//   if (propertyType) queryParams.append("property_type", propertyType);
-
-//   try {
-//     const response = await fetch(`http://localhost:${port}/rentals/search?${queryParams.toString()}`);
-
-    
-//     // Debugging: Log response before parsing JSON
-//     const text = await response.text();
-//     // console.log("Raw Response:", text);
-
-    
-
-//     const data = JSON.parse(text);
-//     console.log(data.rentals);
-//     navigate("/rentals", { state: { rentals: data.rentals } });
-//   } catch (error) {
-//     console.error("Error fetching rentals:", error);
-//   }
-// };
-
 const handleSearch = async (e) => {
   e.preventDefault();
 
@@ -85,7 +59,7 @@ const handleSearch = async (e) => {
             onChange={(e) => setAddress(e.target.value)}
             required
           />
-          </div>
+        </div>
           <button className="search-btn" type="submit">
             <FaSearch />
             Search

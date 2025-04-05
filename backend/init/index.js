@@ -16,8 +16,7 @@ async function main(){
 
 const initDB=async ()=>{
     await Rental.deleteMany({});
-    // to add owner to every rental
-    initdata.data=initdata.data.map((obj)=>({...obj,owner:"67cc43759358e1766f7983a9"}));
+    initdata.data=initdata.data.map((obj)=>({...obj,postedBy:"67f0b2ff03e140786a239fa5"}));
     await Rental.insertMany(initdata.data);
     console.log("data was initialised");
 }

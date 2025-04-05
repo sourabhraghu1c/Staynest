@@ -1,10 +1,10 @@
 const express= require("express");
 
 const {validateReview, isLoggedIn, isReviewAuther}=require("../Middlewares/middleware.js");
-//to create router
+
 const router=express.Router({mergeParams:true});
 
-//controller
+
 const reviewController=require("../controllers/review.js");
 
 

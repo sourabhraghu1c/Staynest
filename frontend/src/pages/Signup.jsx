@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import {ToastContainer} from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { handleError, handleSuccess } from "../utils";
 
 export default function Signup() {
@@ -10,7 +10,7 @@ export default function Signup() {
 
     const onSubmit = async (data) => {
         try {
-            let response = await fetch(`http://localhost:${port}/signup`, {
+            const response = await fetch(`http://localhost:${port}/signup`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -18,51 +18,97 @@ export default function Signup() {
                 body: JSON.stringify(data),
             });
 
-            let result = await response.json(); // Get JSON response
-            const {success,message,error}=result;
-            if(success){
+            const result = await response.json();
+            const { success, message, error } = result;
+
+            if (success) {
                 handleSuccess(message);
-                setTimeout(() => {
-                    navigate("/login");
-                }, 1000);
-            }
-            else if(error){
-                //in case of server side error
-                const details=error?.details[0].message;
+                setTimeout(() => navigate("/login"), 1000);
+            } else if (error) {
+                const details = error?.details?.[0]?.message || "Signup failed.";
                 handleError(details);
-            }
-            else if(!success){
+            } else {
                 handleError(message);
             }
         } catch (error) {
-            // console.error("Signup error:", error);
-            // alert("Something went wrong. Please try again.");
-            handleError(error);
+            handleError(error.message);
         }
     };
 
     return (
-        
         <div className="container">
-        <h1>Signup</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div>
-                <label htmlFor="username">Username:</label>
-                <input placeholder="Username" autoFocus {...register("username", { required: true })} type="text" />
-            </div>
-            <div>
-                <label htmlFor="email">Email:</label>
-                <input placeholder="Email" {...register("email", { required: true })} type="email" />
-            </div>
-            <div>
-                <label htmlFor="password">Password:</label>
-                <input placeholder="Password" {...register("password", { required: { value: true, message: "This field is required" }, minLength: { value: 3, message: "Min length is 3" } })} type="password" />
-                {errors.password && <span>{errors.password.message}</span>}
-            </div>
+            <h1>Signup</h1>
+            <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+                <div>
+                    <label htmlFor="username">Username:</label>
+                    <input placeholder="Username" {...register("username", { required: true, minLength: 4 })} />
+                    {errors.username && <span>Username is required (min 4 chars)</span>}
+                </div>
+
+                <div>
+                    <label htmlFor="phonenumber">Phone Number:</label>
+                    <input
+                        placeholder="Phone Number"
+                        {...register("phonenumber", {
+                            required: true,
+                            pattern: {
+                                value: /^\d{10}$/,
+                                message: "Phone number must be 10 digits"
+                            }
+                        })}
+                    />
+                    {errors.phonenumber && <span>{errors.phonenumber.message}</span>}
+                </div>
+
+                <div>
+                    <label htmlFor="email">Email (optional):</label>
+                    <input placeholder="Email" {...register("email", { pattern: /^\S+@\S+$/i })} />
+                    {errors.email && <span>Invalid email address</span>}
+                </div>
+
+                <div>
+                    <label>Role:</label>
+                    <div>
+                        <label>
+                            <input
+                                type="radio"
+                                value="PropertyOwner"
+                                {...register("role", { required: true })}
+                            />
+                            Property Owner
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <input
+                                type="radio"
+                                value="Homeseeker"
+                                {...register("role", { required: true })}
+                            />
+                            Home Seeker
+                        </label>
+                    </div>
+                    {errors.role && <span>Please select a role</span>}
+                </div>
+
+                <div>
+                    <label htmlFor="password">Create Password:</label>
+                    <input
+                        placeholder="Password"
+                        type="text"
+                        autoComplete="off"
+                        {...register("password", {
+                            required: "Password is required",
+                            minLength: { value: 4, message: "Password must be at least 4 characters" },
+                            maxLength: { value: 100, message: "Password too long" }
+                        })}
+                    />
+                    {errors.password && <span>{errors.password.message}</span>}
+                </div>
+
                 <input disabled={isSubmitting} type="submit" value="Sign Up" />
-        </form>
-        <ToastContainer/>
+            </form>
+            <ToastContainer />
         </div>
-        
     );
 }
