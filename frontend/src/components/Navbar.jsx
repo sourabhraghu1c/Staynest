@@ -20,23 +20,30 @@ const Navbar = () => {
 
       <div className="nav-right">
         <div className="nav-right-btn">
+          <button className="auth-btn">
+              <a href="/services">Services</a>
+          </button>
           {loggedInUser ? (
             <>
-            <form className="auth-form" action="/rentals/new">
-              <button type="submit" className="auth-btn">Add rental</button>
-            </form>
-              < Menu />
+              {(loggedInUser.role === "PropertyOwner" || loggedInUser.role === "admin") && (
+                <button className="auth-btn">
+                  <a href="/rentals/new">Add rental</a>
+                </button>
+              )}
+
+              {(loggedInUser.role === "Homeseeker" || loggedInUser.role === "admin") && (
+                <button className="auth-btn">
+                  <a href="/Roommates">Join rental</a>
+                </button>
+              )}
+              <Menu />
             </>
           ) : (
-            <>
-            <button className="auth-btn">
-              <a href="/services">Services</a>
-            </button>
             <button className="auth-btn">
               <a href="/login">Login/Register</a>
             </button>
-            </>
           )}
+
         </div>
       </div>
     </div>

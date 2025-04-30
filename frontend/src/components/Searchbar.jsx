@@ -30,7 +30,6 @@ const handleSearch = async (e) => {
     const response = await fetch(`http://localhost:${port}/rentals/search?${queryParams.toString()}`);
     const text = await response.text();
     const data = JSON.parse(text);
-    console.log(data.rentals);
     navigate("/rentals", { state: { rentals: data.rentals } });
 
     // Clear input fields after search

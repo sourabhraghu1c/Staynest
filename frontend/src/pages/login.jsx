@@ -2,7 +2,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";  
 import { handleError, handleSuccess } from "../utils";
-import "./Login.css";
+import styles from "./Login.module.css";
+
 
 export default function Login() {
     const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm();
@@ -41,24 +42,45 @@ export default function Login() {
     };
 
     return (
-        <div className="login-container">
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="container">
-                    <input placeholder="Username" {...register("username", { required: true })} type="text" />
-                    <br />
-                    <input placeholder="Password" {...register("password", {
-                        required: { value: true, message: "This field is required" },
-                        minLength: { value: 3, message: "Min length is 3" }
-                    })} type="password" />
-                    <br />
-                    <input disabled={isSubmitting} type="submit" value="Login" />
-                </div>
+        <div className={styles["login-container"]}>
+        <div className={styles.form}>
+            <div className={styles.heading}>
+            <h1>Welcome Back</h1>
+            <p>Login to continue</p>
+            </div>
+            <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+            <div className={styles.formRow}>
+                <label htmlFor="username">Username:</label>
+                <input
+                placeholder="Username"
+                {...register("username", { required: true })}
+                type="text"
+                />
+                {errors.username && <span className={styles.error}>Username is required</span>}
+            </div>
+
+            <div className={styles.formRow}>
+                <label htmlFor="password">Password:</label>
+                <input
+                placeholder="Password"
+                {...register("password", {
+                    required: { value: true, message: "This field is required" },
+                    minLength: { value: 3, message: "Min length is 3" }
+                })}
+                type="password"
+                />
+                {errors.password && <span className={styles.error}>{errors.password.message}</span>}
+            </div>
+
+            <input disabled={isSubmitting} className={styles.loginBtn} type="submit" value="Login" />
             </form>
 
-            <div className="signup-section">
-                <p>New to Staynest?</p>
-                <button className="signup-btn" onClick={() => navigate("/signup")}>Sign Up</button>
+            <div className={styles.signupSection}>
+            <p>New to Staynest?</p>
+            <button className={styles.signupBtn} onClick={() => navigate("/signup")}>Sign Up</button>
             </div>
         </div>
+        </div>
+
     );
 }

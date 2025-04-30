@@ -40,7 +40,6 @@ const handleSubmit = async (event) => {
     }
 
     const newReview = await response.json();
-    console.log("Review submitted:", newReview);
     setRating(1);
     setComment("");
 

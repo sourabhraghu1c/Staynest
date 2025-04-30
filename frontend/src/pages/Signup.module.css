@@ -1,0 +1,145 @@
+.heading {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.heading h1 {
+  font-size: 2rem;
+  font-weight: 500;
+  color: black;
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.5px;
+}
+
+.heading p {
+  font-size: 1rem;
+  color: #555;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  background-color:white;
+  padding: 2rem 1rem;
+}
+
+.form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 615px;
+  box-sizing: border-box;
+}
+
+.formRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+label {
+  flex: 1;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+input {
+  flex: 2;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.signupBtn {
+  margin-top: 1rem;
+  width: 100%;
+  background-color: maroon;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 0.7rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signupBtn:hover {
+  background-color: darkred;
+}
+
+.error {
+  display: block;
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.radioGroup {
+  flex: 2;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+
+/* ✅ Responsive Tweaks */
+@media screen and (max-width: 768px) {
+  .form {
+    padding: 1.5rem;
+  }
+
+  .formRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  label {
+    margin-bottom: 0.3rem;
+  }
+
+  .radioGroup {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .heading h1 {
+    font-size: 1.8rem;
+  }
+
+  .heading p {
+    font-size: 0.95rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .form {
+    padding: 1rem;
+  }
+
+  .heading h1 {
+    font-size: 1.5rem;
+  }
+
+  .heading p {
+    font-size: 0.9rem;
+  }
+
+  .signupBtn {
+    padding: 0.6rem;
+  }
+}

@@ -53,11 +53,9 @@ module.exports.updateProfileSettings = async (req, res) => {
     }
 
     let profileImage = user.profileImage; 
-    console.log("old image=",profileImage);
 
     if (req.file) {
       profileImage = req.file.path;
-      console.log("new image=",profileImage||"no new image");
     }
 
     const isProfileModified = (

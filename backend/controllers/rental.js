@@ -6,15 +6,25 @@ const {storage}=require("../config/cloudconfig.js");
 
 
 
-module.exports.index = async(req, res) => {
-    try {
-        const allRentals = await Rental.find({});
-        return res.json(allRentals); 
-    } catch (error) {
-        console.error("Error fetching rentals:", error);
-        return res.status(500).json({ error: "Internal Server Error" });
-    }
-};
+// module.exports.index = async(req, res) => {
+//     try {
+//         const allRentals = await Rental.find({});
+//         return res.json(allRentals); 
+//     } catch (error) {
+//         console.error("Error fetching rentals:", error);
+//         return res.status(500).json({ error: "Internal Server Error" });
+//     }
+// };
+
+    module.exports.index = async (req, res) => {
+        try {
+            const allRentals = await Rental.find({ addedByHomeseeker: false });
+            return res.json(allRentals); 
+        } catch (error) {
+            console.error("Error fetching rentals:", error);
+            return res.status(500).json({ error: "Internal Server Error" });
+        }
+    };
 
 module.exports.showRental = async (req, res) => {
     let { id } = req.params;
@@ -38,7 +48,6 @@ module.exports.createRental = async (req, res) => {
                 filename: req.file.originalname,
             };
         }
-        console.log("newly adder rental is :",newRental);
         await newRental.save();
         return res.status(201).json({ message: "New rental created!", success:true });
     } catch (error) {
@@ -90,8 +99,6 @@ module.exports.destroyRental = async (req, res) => {
 
 module.exports.searchRentals = async (req, res) => {
     const { address, price_range, property_type } = req.query;
-    console.log("request reach to search with this data;-",req.query)
-    
     try {
         const query = {};
 

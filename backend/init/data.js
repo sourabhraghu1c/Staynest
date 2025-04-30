@@ -327,7 +327,12 @@ const rentalData = [
         phone: "1234567891",
         email: ""
       },
-      addedByHomeseeker:false,
+      ownerDetails: {
+          name:"Ayush",
+          phone:"7828769911",
+          email:"Ayush@gmail.com"
+      },
+      addedByHomeseeker:true,
     }
   ];
 

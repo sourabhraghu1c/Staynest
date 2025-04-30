@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "./Show.css";
+import "./ShowRoommate.css";
 import { handleError, handleSuccess } from "../utils";
 import Map from "../components/Map";
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
-import Review from "../components/Review";
 
-const Show = () => {
+const ShowRoommate = () => {
   const { id } = useParams(); // Get rental ID from URL
   const [rental, setRental] = useState(null);
   const [islistedByUser, setIslistedByUser] = useState(false); // State to check ownership
@@ -59,44 +58,6 @@ const Show = () => {
 
   if (!rental) return <h2>Loading...</h2>;
 
-  const handleDeleteReview = async (review_id) => {
-  try {
-    if (!token) {
-      handleError("Please login first!");
-      return;
-    }
-
-    const response = await fetch(`http://localhost:${port}/rentals/${id}/reviews/${review_id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: token,
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to delete review");
-    }
-
-    handleSuccess("Review deleted successfully!");
-
-    setRental((prevRental) => {
-  if (!prevRental || !prevRental.reviews) {
-    return prevRental;
-  }
-  return {
-    ...prevRental,
-    reviews: prevRental.reviews.filter((review) => review._id !== review_id),
-  };
-});
-
-
-  } catch (err) {
-    console.error("Error deleting review:", err);
-    handleError("Error deleting review. Please try again.");
-  }
-};
-
   const handleDelete = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -105,7 +66,7 @@ const Show = () => {
         return;
       }
 
-      const response = await fetch(`http://localhost:${port}/rentals/${id}`, {
+      const response = await fetch(`http://localhost:${port}/rentalpartner/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: token,
@@ -127,38 +88,40 @@ const Show = () => {
 
   return (
     <>
-      <div className="rental-show-card-container">
-        <div className="rental-show-card">
-          <div>
-            <h1>{rental.title}</h1>
-          </div>
+      <div className="rental-showRoommate-card-container">
+        <div className="rental-showRoommate-card">
+            
           <img
             src={rental.photos.url}
-            className="show-card-img-top"
+            className="showRoommate-card-img-top"
             alt={rental.title}
           />
-          <div className="show-card-body">
+          <div className="showRoommate-card-body">
             <p>
               Listed by: @<i>{rental.postedBy.username}</i>
             </p>
+            <h1>Rental details:</h1>
+            <h3>{rental.title}</h3>
+            <br />
             <p>{rental.description}</p>
             <p>₹{rental.price.toLocaleString("en-IN")} per month</p>
             <p>{`${rental.location.address}(${rental.location.pincode})`}</p>
             <p>Property Type: {rental.propertyType}</p>
             <p>Facilities: {rental.facilities || "Not specified"}</p>
+            <h1>Roompartner Details:</h1>
             <p>
               Contact: {rental.contact.name} ({rental.contact.phone})
             </p>
+            <p>
+              Email: {rental.postedBy.email}
+            </p>
+            {/* <p>
+              Contact: {rental.contact.name} ({rental.contact.phone})
+            </p> */}
           </div>
-
-          {/* Show Edit & Delete buttons only if user is the owner */}
           {islistedByUser && (
             <>
               <Stack direction="row" spacing={13.38}>
-                <Button variant="contained" style={{ backgroundColor: "maroon" }} onClick={() => navigate(`/rentals/${rental._id}/edit`, { state: { rental } })}>
-                  Edit
-                </Button>
-
                 <Button style={{color:"white",backgroundColor:"red",border:"none"}} variant="outlined" startIcon={<DeleteIcon  />} onClick={handleDelete}>
                   Delete
                 </Button>
@@ -167,42 +130,9 @@ const Show = () => {
           )}
         </div>
       </div>
-
-      {/* Add Review */}
-      {(UserRole === "admin" || UserRole === "Homeseeker") && (
-        <div className="rental-show-card" style={{ height: "40vh" }}>
-          <Review setRental={setRental} />
-        </div>
-      )}
-
-      {/* show Reviews */}
-      <hr />
-        {rental.reviews && rental.reviews.length > 0 ? (
-          rental.reviews.map((review, index) => (
-            <div key={index} className="rental-show-card" style={{height:"40vh"}}>
-              <hr />
-              <p>Rating: {review.rating}⭐</p>
-              <p>{review.comment}</p>
-              {(userId === review.author._id || UserRole==="admin") && (
-                <Button
-                  variant="contained"
-                  color="error"
-                  size="small"
-                  startIcon={<DeleteIcon />}
-                  onClick={() => handleDeleteReview(review._id)}
-                >
-                  Delete
-                </Button>
-              )}
-              <hr />
-            </div>
-          ))
-        ) : (
-        <p>No reviews available</p>
-        )}
-
-      <div className="rental-show-card-container" >
-        <div className="rental-show-card" >
+      
+      <div className="rental-showRoommate-card-container" >
+        <div className="rental-showRoommate-card" >
           <div>
             <h2>Location Details:</h2>
           </div>
@@ -217,4 +147,4 @@ const Show = () => {
   );
 };
 
-export default Show;
+export default ShowRoommate;

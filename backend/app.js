@@ -9,6 +9,7 @@ const express= require("express");
 const app=express();
 const mongoose=require("mongoose");
 const rentalRouter=require("./routes/rental.js")
+const rentalPartnerRouter=require("./routes/partnerRental.js")
 const userRouter=require("./routes/user.js");
 const reviewRouter=require("./routes/review.js");
 
@@ -44,6 +45,7 @@ app.listen(port,()=>{
 
 
 app.use("/rentals",rentalRouter);
+app.use("/rentalpartner",rentalPartnerRouter);
 app.use("/rentals/:id/reviews",reviewRouter);
 app.use("/",userRouter);
 

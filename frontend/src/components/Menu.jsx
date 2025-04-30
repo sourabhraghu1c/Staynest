@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link  } from "react-router-dom";
 import { handleSuccess } from "../utils";
 import "./Menu.css";
 
@@ -61,8 +61,33 @@ const Menu = () => {
                     <li className="menu-item" onClick={handleProfileSettings}>
                         Profile Settings
                     </li>
-                    <li className="menu-item" onClick={() => setMenuOpen(false)}>My Rentals</li>
-                    <li className="menu-item" onClick={() => setMenuOpen(false)}>About Us!</li>
+
+                    {(loggedInUser.role === 'PropertyOwner' || loggedInUser.role === 'admin') && (
+                    <li className="menu-item" onClick={() => {
+                        setMenuOpen(false);
+                        navigate('#'); // Replace '#' with actual route if available
+                    }}>
+                        My Rentals
+                    </li>
+                    )}
+                    {(loggedInUser.role === 'Homeseeker' || loggedInUser.role === 'admin') && (
+                    <li className="menu-item" onClick={() => {
+                        setMenuOpen(false);
+                        navigate('/rentalpartner/new');
+                    }}>
+                        Add Roommate
+                    </li>
+                    )}
+
+
+
+
+                    <li className="menu-item" onClick={() => {
+                        setMenuOpen(false);
+                        navigate("/about");
+                    }}>
+                        About Us!
+                    </li>
                     <li className="menu-item" onClick={handleLogout}>
                         Log Out
                     </li>

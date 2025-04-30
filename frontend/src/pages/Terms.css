@@ -1,0 +1,41 @@
+.terms-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.terms-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+.terms-section {
+  margin-bottom: 30px;
+}
+
+.terms-section h2 {
+  font-size: 1.6rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.terms-section p,
+.terms-section ul {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.terms-section ul {
+  padding-left: 0;
+  list-style-type: disc;
+  list-style-position: inside;
+  margin-left: 20px;
+}
+
+
+.terms-section p{
+    text-align: center;
+}

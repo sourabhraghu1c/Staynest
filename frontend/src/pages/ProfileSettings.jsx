@@ -53,9 +53,7 @@ export default function ProfileSettings() {
                     "Authorization": token
                 },
             });
-            console.log(response.data);
             if (!response.data.success) {
-                console.log(response.data.message);
                 handleError(response.data.message);
                 return;
             }

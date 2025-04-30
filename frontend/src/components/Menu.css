@@ -1,6 +1,7 @@
 .menu-container {
   position: relative;
   display: inline-block;
+  height: 20vw;
 }
 
 /* Button (Avatar) */
@@ -37,7 +38,7 @@
   border-radius: 12px;
   overflow: hidden;
   outline: 0;
-  height: 170px;
+  /* height: 100%; */
   background: #fff;
   border: 1px solid #dae2ed;
   color: #1c2025;
@@ -65,3 +66,20 @@
   border: 2px solid #99ccf3;
 }
 
+.menu-item a{
+  text-decoration: none;
+  background-color:white ;
+  color:black;
+  margin: 0;
+}
+
+
+@media (max-width: 768px) {
+.avatar {
+  width: 22px;
+  height: 22px;
+}
+
+
+
+}

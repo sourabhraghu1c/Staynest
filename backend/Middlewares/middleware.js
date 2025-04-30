@@ -11,6 +11,12 @@ module.exports.validateRental = (req, res, next) => {
         if (typeof req.body.contact === "string") {
             req.body.contact = JSON.parse(req.body.contact);
         }
+        if (typeof req.body.ownerDetails === "string") {
+            req.body.ownerDetails = JSON.parse(req.body.ownerDetails);
+        }
+        if (typeof req.body.addedByHomeseeker === "string") {
+            req.body.addedByHomeseeker = req.body.addedByHomeseeker === "true";
+        }
     } catch (error) {
         return res.status(400).json({  message: "Invalid JSON format", success: false });
     }
@@ -72,7 +78,6 @@ module.exports.isOwner= async(req,res,next)=>{
     let { id } = req.params;
     let rental= await Rental.findById(id);
     if(req.user.role==="admin" || rental.postedBy._id.equals(req.user._id) ){
-        console.log("isowner done");
         return next();
     }
     return res.status(401).json({message:"You are not the Lister of this Rental!",success:false});
