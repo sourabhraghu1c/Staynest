@@ -79,9 +79,6 @@ const Menu = () => {
                     </li>
                     )}
 
-
-
-
                     <li className="menu-item" onClick={() => {
                         setMenuOpen(false);
                         navigate("/about");

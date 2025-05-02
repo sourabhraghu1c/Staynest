@@ -3,6 +3,10 @@ if(process.env.NODE_ENV !="production"){
     require("dotenv").config();
 }
 
+// for deployment
+//import path from "path";
+const path = require("path");
+
 const cors = require("cors");
 const bodyParser=require("body-parser");
 const express= require("express");
@@ -14,6 +18,8 @@ const userRouter=require("./routes/user.js");
 const reviewRouter=require("./routes/review.js");
 
 app.use(bodyParser.json());
+
+
 
 
 app.use(cors({
@@ -39,9 +45,11 @@ main().then(()=>{
 async function main(){
     await mongoose.connect(mongoUrl);
 }
-app.listen(port,()=>{
-    console.log("server connected on port ",port);
-});
+
+
+
+//depment
+const _dirname=path.resolve();
 
 
 app.use("/rentals",rentalRouter);
@@ -49,8 +57,17 @@ app.use("/rentalpartner",rentalPartnerRouter);
 app.use("/rentals/:id/reviews",reviewRouter);
 app.use("/",userRouter);
 
-app.all("*", (req, res, next) => {
-    res.status(404).json({message:"page not found",success:false});
+// app.all("*", (req, res, next) => {
+//     res.status(404).json({message:"page not found",success:false});
+// });
+
+
+app.use(express.static(path.join(_dirname,"/frontend/dist")));
+app.get('*',(_,res)=>{
+    res.sendFile(path.resolve(_dirname,"frontend","dist","index.html"));
 });
 
 
+app.listen(port,()=>{
+    //console.log("server connected on port ",port);
+});

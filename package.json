@@ -1,6 +1,37 @@
 {
-
+  "name": "staynest",
+  "version": "1.0.0",
+  "description": "A hostel/PG room booking website for students.",
+  "main": "app.js",
+  "scripts": {
+    "dev":"nodemon backend/app.js",
+    "build":"npm install && npm install --prefix frontend && npm run build --prefix frontend",
+    "start":"nodemon backend/app.js"
+  },
+  "keywords": [
+    "hostel",
+    "PG",
+    "booking",
+    "student",
+    "rooms"
+  ],
+  "author": "Sourabh Raghuwanshi",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sourabhraghu1c/Staynest.git"
+  },
   "dependencies": {
-    "vite": "^6.1.0"
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.3",
+    "cloudinary": "^1.21.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.1",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.8.0",
+    "multer": "^1.4.5-lts.1",
+    "multer-storage-cloudinary": "^4.0.0"
   }
 }
