@@ -38,8 +38,7 @@ export default function AddRental() {
             formData.append("photos", data.photos[0]); // Single file upload
         }
 
-        // ✅ Send everything in a single request
-        console.log("this is addRental log",token);
+        // ✅ Send everything in a single request 
         const response = await axios.post(`https://staynest-l88z.onrender.com/rentals`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",

@@ -69,5 +69,5 @@ app.get('*',(_,res)=>{
 
 
 app.listen(port,()=>{
-    //console.log("server connected on port ",port);
+    console.log("server connected on port ",port);
 });
