@@ -3,6 +3,8 @@ import "./Navbar.css";
 import SearchBar from "./Searchbar";
 import Menu from "./Menu";
 import { useAuth } from "../Context/AuthContext"; 
+import { Link } from "react-router-dom";
+
 
 const Navbar = () => {
   const { loggedInUser } = useAuth(); 
@@ -11,7 +13,7 @@ const Navbar = () => {
     <div className="navbar">
       <div className="nav-left">
         <FaCompass className="icon" />
-        <a href="/" className="nav-link">Explore</a>
+        <Link to="/" className="nav-link">Explore</Link>
       </div>
 
       <div className="nav-middle">
@@ -21,26 +23,26 @@ const Navbar = () => {
       <div className="nav-right">
         <div className="nav-right-btn">
           <button className="auth-btn">
-              <a href="/services">Services</a>
+              <Link to="/services">Services</Link>
           </button>
           {loggedInUser ? (
             <>
               {(loggedInUser.role === "PropertyOwner" || loggedInUser.role === "admin") && (
                 <button className="auth-btn">
-                  <a href="/rentals/new">Add rental</a>
+                  <Link to="/rentals/new">Add rental</Link>
                 </button>
               )}
 
               {(loggedInUser.role === "Homeseeker" || loggedInUser.role === "admin") && (
                 <button className="auth-btn">
-                  <a href="/Roommates">Join rental</a>
+                  <Link to="/Roommates">Join rental</Link>
                 </button>
               )}
               <Menu />
             </>
           ) : (
             <button className="auth-btn">
-              <a href="/login">Login/Register</a>
+              <Link to="/login">Login/Register</Link>
             </button>
           )}
 
