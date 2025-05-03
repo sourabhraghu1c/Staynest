@@ -39,7 +39,7 @@ export default function AddRental() {
         }
 
         // ✅ Send everything in a single request
-        const response = await axios.post(`http://localhost:${port}/rentals`, formData, {
+        const response = await axios.post(`https://staynest-l88z.onrender.com/rentals`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
                 "Authorization": token

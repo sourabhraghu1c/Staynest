@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 
 
 app.use(cors({
-    origin:`http://localhost:${process.env.FRONTEND_PORT || 3001}`,
+    origin:`https://staynest-l88z.onrender.com`,
     credentials: true,
     methods: "GET,POST,PUT,DELETE",
     allowedHeaders: "Content-Type,Authorization"

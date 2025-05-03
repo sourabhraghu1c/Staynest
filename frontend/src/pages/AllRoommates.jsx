@@ -17,7 +17,7 @@ useEffect(() => {
     const fetchRentals = async () => {
         try {
             const token = localStorage.getItem("token"); // or however you're storing the token
-            const response = await fetch(`http://localhost:${port}/rentalpartner`, {
+            const response = await fetch(`https://staynest-l88z.onrender.com/rentalpartner`, {
                 method: "GET",
                 headers: {
                     Authorization: token,

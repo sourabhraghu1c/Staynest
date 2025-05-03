@@ -47,7 +47,7 @@ export default function ProfileSettings() {
                 formData.append("profileImage", data.profileImage);
             }
 
-            const response = await axios.post(`http://localhost:${port}/profile-settings`, formData, {
+            const response = await axios.post(`https://staynest-l88z.onrender.com/profile-settings`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     "Authorization": token

@@ -29,7 +29,7 @@ const ShowRoommate = () => {
           return;
         }
 
-        const response = await fetch(`http://localhost:${port}/rentals/${id}`, {
+        const response = await fetch(`https://staynest-l88z.onrender.com/rentals/${id}`, {
           method: "GET",
           headers: {
             Authorization: token,

@@ -26,7 +26,7 @@ const handleSubmit = async (event) => {
   };
 
   try {
-    const response = await fetch(`http://localhost:${port}/rentals/${id}/reviews`, {
+    const response = await fetch(`https://staynest-l88z.onrender.com/rentals/${id}/reviews`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

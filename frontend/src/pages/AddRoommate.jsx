@@ -42,7 +42,7 @@ export default function AddRoommate() {
         }
 
         // ✅ Send everything in a single request
-        const response = await axios.post(`http://localhost:${port}/rentalpartner`, formData, {
+        const response = await axios.post(`https://staynest-l88z.onrender.com/rentalpartner`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
                 "Authorization": token

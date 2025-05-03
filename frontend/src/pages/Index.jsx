@@ -14,7 +14,7 @@ export default function Index() {
   const loggedInUser = JSON.parse(localStorage.getItem('loginUser'));
 
   useEffect(() => {
-    fetch(`http://localhost:${port}/rentals`) 
+    fetch(`https://staynest-l88z.onrender.com/rentals`) 
       .then((res) => res.json())
       .then((data) => setRentals(data))
       .catch((err) => console.error("Error fetching rentals:", err));

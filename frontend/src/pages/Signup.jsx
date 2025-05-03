@@ -43,7 +43,7 @@ export default function Signup() {
 
     const onSubmit = async (data) => {
         try {
-            const response = await fetch(`http://localhost:${port}/signup`, {
+            const response = await fetch(`https://staynest-l88z.onrender.com/signup`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -58,7 +58,7 @@ export default function Signup() {
                 handleSuccess("Signup successful!");
 
                 // Automatically login the user here
-                const loginResponse = await fetch(`http://localhost:${port}/login`, {
+                const loginResponse = await fetch(`https://staynest-l88z.onrender.com/login`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({

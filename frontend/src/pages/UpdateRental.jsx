@@ -64,7 +64,7 @@ useEffect(() => {
             formData.append("photos", data.photos[0]); // Single file upload
         }
 
-        const response = await axios.put(`http://localhost:${port}/rentals/${id}`, formData, {
+        const response = await axios.put(`https://staynest-l88z.onrender.com/rentals/${id}`, formData, {
                 headers: { 
                     "Content-Type": "multipart/form-data",
                     "Authorization": token

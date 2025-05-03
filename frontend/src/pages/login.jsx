@@ -13,7 +13,7 @@ export default function Login() {
 
     const onSubmit = async (data) => {
         try {
-            let response = await fetch(`http://localhost:${port}/login`, {
+            let response = await fetch(`https://staynest-l88z.onrender.com/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),

@@ -27,7 +27,7 @@ const handleSearch = async (e) => {
   if (propertyType) queryParams.append("property_type", propertyType);
 
   try {
-    const response = await fetch(`http://localhost:${port}/rentals/search?${queryParams.toString()}`);
+    const response = await fetch(`https://staynest-l88z.onrender.com/rentals/search?${queryParams.toString()}`);
     const text = await response.text();
     const data = JSON.parse(text);
     navigate("/rentals", { state: { rentals: data.rentals } });
