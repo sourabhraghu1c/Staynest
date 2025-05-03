@@ -23,10 +23,10 @@ app.use(bodyParser.json());
 
 
 app.use(cors({
-    origin:`http://localhost:${process.env.FRONTEND_PORT || 3001}`,  // Allow requests from React frontend
-    credentials: true,  // Necessary for cookies/sessions
+    origin:`http://localhost:${process.env.FRONTEND_PORT || 3001}`,
+    credentials: true,
     methods: "GET,POST,PUT,DELETE",
-    allowedHeaders: "Content-Type,Authorization" // Explicitly allow headers
+    allowedHeaders: "Content-Type,Authorization"
 }));
 
 //to parse the data from request

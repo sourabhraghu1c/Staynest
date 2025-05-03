@@ -1,10 +1,6 @@
 const express= require("express");
-//to create router
 const router=express.Router();
-//controllers
 const rentalController=require("../controllers/rental.js");
-//middleware
-
 const {isLoggedIn, isOwner,validateRental}=require("../Middlewares/middleware.js");
 
 //multer files from form

@@ -2,21 +2,9 @@ const Rental =require("../models/rental.js");
 const Review=require("../models/review.js");
 const multer = require("multer");
 const {storage}=require("../config/cloudconfig.js");
-// const upload = multer({ storage });
 
 
-
-// module.exports.index = async(req, res) => {
-//     try {
-//         const allRentals = await Rental.find({});
-//         return res.json(allRentals); 
-//     } catch (error) {
-//         console.error("Error fetching rentals:", error);
-//         return res.status(500).json({ error: "Internal Server Error" });
-//     }
-// };
-
-    module.exports.index = async (req, res) => {
+module.exports.index = async (req, res) => {
         try {
             const allRentals = await Rental.find({ addedByHomeseeker: false });
             return res.json(allRentals); 
@@ -24,7 +12,7 @@ const {storage}=require("../config/cloudconfig.js");
             console.error("Error fetching rentals:", error);
             return res.status(500).json({ error: "Internal Server Error" });
         }
-    };
+};
 
 module.exports.showRental = async (req, res) => {
     let { id } = req.params;
