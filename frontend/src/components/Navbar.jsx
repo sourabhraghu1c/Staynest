@@ -2,7 +2,7 @@ import { FaCompass } from "react-icons/fa";
 import "./Navbar.css";
 import SearchBar from "./Searchbar";
 import Menu from "./Menu";
-import { useAuth } from "../context/AuthContext"; 
+import { useAuth } from "../Context/AuthContext"; 
 
 const Navbar = () => {
   const { loggedInUser } = useAuth(); 
