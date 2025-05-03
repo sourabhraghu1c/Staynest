@@ -62,8 +62,9 @@ module.exports.loginValidation=(req,res,next)=>{
 
 module.exports.isLoggedIn=(req,res,next)=>{
     const auth=req.headers['authorization'];
+    console.log(` auth =${auth}`);
     if(!auth){
-        return res.status(401).json({message:"Unauthorized, please login first",success:false});
+        return res.status(401).json({message:"Unauthorized, please login first from middleware isLoggedIn",success:false});
     }
     try{
         const decoded=jwt.verify(auth,process.env.JWT_SECRET);

@@ -39,6 +39,7 @@ export default function AddRental() {
         }
 
         // ✅ Send everything in a single request
+        console.log("this is addRental log",token);
         const response = await axios.post(`https://staynest-l88z.onrender.com/rentals`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
