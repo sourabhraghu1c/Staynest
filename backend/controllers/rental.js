@@ -89,6 +89,7 @@ module.exports.searchRentals = async (req, res) => {
     const { address, price_range, property_type } = req.query;
     try {
         const query = {};
+        query.addedByHomeseeker = false;
 
         if (address) {
             query["location.address"] = { $regex: address, $options: "i" };
